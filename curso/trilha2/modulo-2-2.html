@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.2 Ferramentas e Dados | Super Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; } html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; } html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; } html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); } html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; } html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Super Skills</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">4 Pilares</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Na Prática</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.2</span>
+    </div>
+  </nav>
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">👁️ Pilar 2 — Ferramentas e Dados</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Como conectar suas skills a fontes de dados em tempo real usando conectores nativos, APIs externas e o Zapier como ponte universal para qualquer sistema.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">35</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Intermediário</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">👁️ Por que skills precisam de "olhos"</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Claude Code tem um corte de dados em uma data específica. Tudo que aconteceu depois está fora do seu conhecimento. Para skills estratégicas — que dependem de tendências, performance e contexto atual — trabalhar sem fontes externas é trabalhar com uma fotografia antiga do mundo.</p>
+
+      <!-- Cenário do Rafael -->
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-lg">👤</div>
+          <div>
+            <div class="font-semibold text-white">Rafael Moreira</div>
+            <div class="text-xs text-neutral-400">Consultor de inovação, usa Claude Code para análises de mercado semanais</div>
+          </div>
+        </div>
+        <p class="text-neutral-300 text-sm italic mb-3">"Pedi para a skill analisar as tendências de IA para apresentar para um cliente. Recebi uma análise linda — citando GPT-4 como modelo mais avançado, mencionando que o Claude 2 era o principal competidor da OpenAI, e sem mencionar o Claude 3, Gemini 1.5 ou nada do que aconteceu em 2024. O cliente riu. Eu queria sumir."</p>
+        <p class="text-neutral-400 text-xs">Problema: skill sem acesso a dados atuais. Análise de tendências de IA com dados de 2023 em 2026 é inutilizável.</p>
+      </div>
+
+      <!-- Comparação: skill cega vs skill com dados reais -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">❌ Skill cega — sem dados externos</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap">Análise de tendências em IA:
+
+• Modelos de linguagem estão crescendo
+• OpenAI lidera o mercado
+• Empresas estão adotando IA
+• O setor deve continuar expandindo
+• ChatGPT é a ferramenta mais usada
+
+(Análise baseada em padrões genéricos
+do treinamento — pode ter 12-24 meses
+de defasagem)</pre>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">✅ Skill com dados reais (Firecrawl + Search)</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap">Análise de tendências em IA — Abril 2026:
+
+• Buscas por "Claude Code" cresceram 340%
+  nos últimos 30 dias (Google Trends)
+• Anthropic anunciou Claude 3.7 em Mar/2026
+  com +180% performance em coding tasks
+• 73% das Fortune 500 já têm projeto de IA
+  em produção (McKinsey, publicado 12/03)
+• Stack Overflow: 61% dos devs usam IA
+  diariamente vs 31% em 2024
+
+(Dados coletados em tempo real — fontes
+verificáveis com link)</pre>
+        </div>
+      </div>
+
+      <!-- Diagrama: modelo sem vs com ferramentas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Modelo sem ferramentas vs com ferramentas</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="text-xs text-red-400 font-semibold mb-3 uppercase">Modelo isolado</div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-sm text-red-400 font-medium text-center w-full">Dados de treino (data de corte)</div>
+              <span class="text-neutral-600 text-xl">↓</span>
+              <div class="bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-sm text-neutral-400 font-medium text-center w-full">Claude Code</div>
+              <span class="text-neutral-600 text-xl">↓</span>
+              <div class="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-sm text-red-400 font-medium text-center w-full">Output desatualizado</div>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs text-blue-400 font-semibold mb-3 uppercase">Modelo com ferramentas</div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="flex gap-2 w-full">
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg px-3 py-2 text-xs text-blue-400 text-center flex-1">Web ao vivo</div>
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg px-3 py-2 text-xs text-blue-400 text-center flex-1">APIs externas</div>
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg px-3 py-2 text-xs text-blue-400 text-center flex-1">Dados próprios</div>
+              </div>
+              <span class="text-neutral-600 text-xl">↓</span>
+              <div class="bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-sm text-neutral-400 font-medium text-center w-full">Claude Code</div>
+              <span class="text-neutral-600 text-xl">↓</span>
+              <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center w-full">Output com dados atuais</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🔌 Conectores nativos do Claude</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Claude.ai e o Claude Code têm um ecossistema crescente de conectores nativos via MCP (Model Context Protocol). Esses conectores são integrações pré-construídas que permitem acesso direto a sistemas externos sem precisar configurar APIs manualmente.</p>
+
+      <!-- Diagrama visual do ecossistema de conectores -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-5">Ecossistema de Conectores MCP</h4>
+        <div class="flex flex-col items-center gap-3">
+          <div class="bg-blue-600 text-white rounded-xl px-6 py-3 text-sm font-bold">Claude Code</div>
+          <span class="text-neutral-600 text-xl">↕ MCP</span>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 w-full">
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">📧</div>
+              <div class="text-xs text-neutral-300 font-medium">Gmail</div>
+              <div class="text-xs text-neutral-500">E-mails</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">📁</div>
+              <div class="text-xs text-neutral-300 font-medium">Google Drive</div>
+              <div class="text-xs text-neutral-500">Documentos</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">📅</div>
+              <div class="text-xs text-neutral-300 font-medium">Calendar</div>
+              <div class="text-xs text-neutral-500">Agenda</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🐙</div>
+              <div class="text-xs text-neutral-300 font-medium">GitHub</div>
+              <div class="text-xs text-neutral-500">Código</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🎨</div>
+              <div class="text-xs text-neutral-300 font-medium">Figma</div>
+              <div class="text-xs text-neutral-500">Design</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🔍</div>
+              <div class="text-xs text-neutral-300 font-medium">Firecrawl</div>
+              <div class="text-xs text-neutral-500">Web scraping</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🗄️</div>
+              <div class="text-xs text-neutral-300 font-medium">PostgreSQL</div>
+              <div class="text-xs text-neutral-500">Banco de dados</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🔔</div>
+              <div class="text-xs text-neutral-300 font-medium">Slack</div>
+              <div class="text-xs text-neutral-500">Mensagens</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">📝</div>
+              <div class="text-xs text-neutral-300 font-medium">Notion</div>
+              <div class="text-xs text-neutral-500">Wikis/Tasks</div>
+            </div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg p-3 text-center">
+              <div class="text-xl mb-1">🌐</div>
+              <div class="text-xs text-neutral-300 font-medium">Brave Search</div>
+              <div class="text-xs text-neutral-500">Pesquisa web</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snippet de configuração do MCP server -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">~/.claude/settings.json — configuração MCP</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">MCP Config</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>{
+  "mcpServers": {
+    "gmail": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-gmail"],
+      "env": {
+        "GMAIL_CREDENTIALS_FILE": "~/.claude/gmail-credentials.json"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-firecrawl"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-sua-chave-aqui"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_seu-token-aqui"
+      }
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "BSA-sua-chave-aqui"
+      }
+    }
+  }
+}</code></pre>
+      </div>
+
+      <!-- Exemplo de skill que usa conector Gmail -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">triagem-parceiros.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill com Gmail MCP</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Triagem de E-mails de Parceiros
+
+## FERRAMENTA NECESSÁRIA
+Requer: MCP Gmail conectado e autenticado
+
+## OBJETIVO
+Analisar e-mails recebidos de parceiros
+estratégicos e priorizar respostas por
+urgência e impacto no negócio.
+
+## INSTRUÇÕES DE EXECUÇÃO
+1. Acesse a caixa de entrada via Gmail MCP
+2. Filtre e-mails das últimas 48h com:
+   - remetentes na lista de parceiros abaixo
+   - ou assuntos contendo: "proposta", "urgente",
+     "oportunidade", "reunião", "contrato"
+3. Para cada e-mail encontrado, analise:
+   - Urgência (Alta/Média/Baixa)
+   - Impacto potencial (escala 1-5)
+   - Ação requerida (responder/arquivar/delegar)
+
+## LISTA DE PARCEIROS PRIORITÁRIOS
+- contato@acme.com.br (cliente enterprise)
+- parceiros@distribuidora-xyz.com (canal principal)
+- rafael@investidorabc.com (investidor anjo)
+
+## OUTPUT FORMAT
+### Triagem — [data]
+**Total analisado:** X e-mails
+**Prioridade Alta:** [lista com remetente + assunto + ação]
+**Prioridade Média:** [lista resumida]
+**Pode aguardar:** [contagem]
+
+### Para cada item de prioridade alta:
+- De: [remetente]
+- Assunto: [assunto]
+- Resumo em 1 frase: [resumo]
+- Ação recomendada: [ação específica]
+- Prazo sugerido: [quando responder]</code></pre>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">📡 Fontes primárias e dados de mercado</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Fontes primárias são os dados antes de serem interpretados por terceiros. Feeds RSS de pesquisadores, posts diretos no X/LinkedIn, changelogs de empresas — são o sinal bruto antes de qualquer curadoria editorial.</p>
+
+      <!-- Lista visual de fontes por categoria -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">🤖</div>
+          <div class="font-semibold text-white text-sm mb-2">IA e Tecnologia</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• anthropic.com/news (RSS)</li>
+            <li>• openai.com/blog (RSS)</li>
+            <li>• deepmind.google/discover</li>
+            <li>• arxiv.org/list/cs.AI</li>
+            <li>• github.com/trending</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">💼</div>
+          <div class="font-semibold text-white text-sm mb-2">Mercado e Negócios</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• producthunt.com (feeds)</li>
+            <li>• news.ycombinator.com</li>
+            <li>• crunchbase.com/discover</li>
+            <li>• cbinsights.com/research</li>
+            <li>• techcrunch.com/startups</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">📊</div>
+          <div class="font-semibold text-white text-sm mb-2">Dados de Busca</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• trends.google.com</li>
+            <li>• semrush.com/analytics</li>
+            <li>• ahrefs.com/keywords</li>
+            <li>• YouTube Analytics (API)</li>
+            <li>• similarweb.com</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">🗣️</div>
+          <div class="font-semibold text-white text-sm mb-2">Redes Sociais</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• X/Twitter (perfis específicos)</li>
+            <li>• LinkedIn (posts de CEOs)</li>
+            <li>• reddit.com/r/MachineLearning</li>
+            <li>• reddit.com/r/artificial</li>
+            <li>• discord públicos de ferramentas</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">📰</div>
+          <div class="font-semibold text-white text-sm mb-2">Newsletters Premium</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• The Batch (deeplearning.ai)</li>
+            <li>• Import AI (Jack Clark)</li>
+            <li>• Ben's Bites (bens.bites.com)</li>
+            <li>• TLDR (tldr.tech)</li>
+            <li>• Exponential View</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="text-lg mb-2">🔬</div>
+          <div class="font-semibold text-white text-sm mb-2">Pesquisa Primária</div>
+          <ul class="space-y-1 text-xs text-neutral-400">
+            <li>• Changelogs de produtos (GitHub)</li>
+            <li>• Documentação oficial (docs.)</li>
+            <li>• Papers (Semantic Scholar)</li>
+            <li>• Relatórios de analistas</li>
+            <li>• Transcripts de earnings calls</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Exemplo de skill com Firecrawl -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">monitor-anthropic-blog.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill com Firecrawl</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Monitor — Blog Anthropic
+
+## FERRAMENTAS NECESSÁRIAS
+- Firecrawl MCP (para scraping)
+- Brave Search MCP (para contexto adicional)
+
+## OBJETIVO
+Monitorar o blog da Anthropic e extrair
+novidades relevantes para criadores de
+conteúdo que ensinam sobre Claude Code.
+
+## INSTRUÇÕES DE EXECUÇÃO
+1. Use Firecrawl para acessar:
+   - https://www.anthropic.com/news
+   - https://docs.anthropic.com/changelog
+2. Extraia posts/updates das últimas 72h
+3. Para cada item relevante, analise:
+   - Impacto para usuários de Claude Code
+   - Oportunidade de conteúdo (Alta/Média/Baixa)
+   - Complexidade para audiência não-técnica
+
+## CRITÉRIO DE RELEVÂNCIA
+Incluir: novos modelos, novas funcionalidades,
+mudanças de preço, novos conectores MCP,
+melhorias de performance documentadas.
+Excluir: posts corporativos, vagas de emprego,
+conteúdo de pesquisa acadêmica avançada.
+
+## OUTPUT FORMAT
+### Radar Anthropic — [data]
+**Novidades da semana:** [contagem]
+
+Para cada item:
+---
+**[Título do update]**
+Data: [data]
+Link: [url]
+O que mudou: [1-2 frases diretas]
+Impacto para você: [como afeta quem usa Claude Code]
+Oportunidade de conteúdo: [ângulo para vídeo/post]
+---</code></pre>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">🔗 APIs e integrações externas</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Quando os conectores nativos não são suficientes, APIs externas abrem o acesso a qualquer sistema que exponha uma interface REST. Plataformas de analytics proprietárias, CRMs, e-commerce — qualquer dado acessível via API pode alimentar suas skills.</p>
+
+      <!-- Snippet de skill que chama API do YouTube Analytics -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">youtube-performance-review.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill com YouTube API</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># YouTube Performance Review — Semanal
+
+## CONFIGURAÇÃO DE API
+Serviço: YouTube Analytics API v2
+Autenticação: OAuth 2.0 (token em env: YT_ACCESS_TOKEN)
+Channel ID: UCxxxxxxxxxxxxxxxxxxxx (configurar)
+Base URL: https://youtubeanalytics.googleapis.com/v2
+
+## INSTRUÇÕES DE EXECUÇÃO
+
+### Passo 1 — Coletar dados dos últimos 7 dias
+Execute GET request:
+```
+GET /reports?
+  ids=channel==MINE&
+  startDate=[7 dias atrás]&
+  endDate=[hoje]&
+  metrics=views,estimatedMinutesWatched,
+          averageViewDuration,subscribersGained,
+          subscribersLost,likes,comments,shares,
+          annotationClickThroughRate&
+  dimensions=video&
+  sort=-views&
+  maxResults=20
+Headers: Authorization: Bearer {YT_ACCESS_TOKEN}
+```
+
+### Passo 2 — Calcular métricas derivadas
+Para cada vídeo no resultado:
+- CTR aproximado via impressions (se disponível)
+- Retenção média = avgViewDuration / videoDuration
+- Taxa de engajamento = (likes + comments) / views
+
+### Passo 3 — Identificar padrões
+Compare com média das últimas 4 semanas:
+- Vídeos acima da média: o que têm em comum?
+- Vídeos abaixo: qual a causa provável?
+
+## OUTPUT FORMAT
+### Relatório YouTube — Semana de [data]
+
+**Performance Geral:**
+| Métrica | Esta Semana | Semana Ant. | Variação |
+| Views totais | X | Y | +/-Z% |
+| Inscrições | X | Y | +/-Z% |
+| Watch time | Xh | Yh | +/-Z% |
+
+**Top 3 Vídeos da Semana:**
+[Para cada um: título, views, retenção, insight]
+
+**Vídeo com Pior Performance:**
+[Título, problema identificado, hipótese]
+
+**Recomendação para Próxima Semana:**
+[1 ação específica baseada nos dados]</code></pre>
+      </div>
+
+      <!-- Diagrama de fluxo: skill → API → dados → análise → output -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Fluxo: Skill com API Externa</h4>
+        <div class="flex flex-col sm:flex-row items-center gap-3 flex-wrap justify-center">
+          <div class="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center">
+            <div class="text-lg mb-1">🧠</div>
+            Skill invocada
+          </div>
+          <span class="text-neutral-600 text-xl font-bold">→</span>
+          <div class="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center">
+            <div class="text-lg mb-1">📡</div>
+            GET/POST para API
+          </div>
+          <span class="text-neutral-600 text-xl font-bold">→</span>
+          <div class="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center">
+            <div class="text-lg mb-1">📦</div>
+            JSON de resposta
+          </div>
+          <span class="text-neutral-600 text-xl font-bold">→</span>
+          <div class="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center">
+            <div class="text-lg mb-1">🔍</div>
+            Análise pelo Claude
+          </div>
+          <span class="text-neutral-600 text-xl font-bold">→</span>
+          <div class="bg-emerald-500/20 border border-emerald-500/30 rounded-lg px-4 py-3 text-sm text-emerald-400 font-medium text-center">
+            <div class="text-lg mb-1">📊</div>
+            Output acionável
+          </div>
+        </div>
+        <div class="mt-4 bg-dark-700/50 rounded-lg p-3">
+          <p class="text-xs text-neutral-400">Exemplo real: Skill "YouTube Performance Review" → chama YouTube Analytics API → recebe JSON com views/CTR/retenção → Claude analisa padrões → gera relatório com recomendação específica para o próximo vídeo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🌉 Zapier como ponte universal</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Zapier é a solução para conectar o Claude Code a qualquer sistema que não tem conector nativo. Com mais de 6.000 integrações disponíveis, o Zapier elimina a necessidade de desenvolvimento customizado para a esmagadora maioria das integrações necessárias.</p>
+
+      <!-- Diagrama: Claude Code → webhook Zapier → 500+ apps -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Arquitetura: Claude Code + Zapier</h4>
+        <div class="flex flex-col items-center gap-3">
+          <div class="flex gap-3 flex-wrap justify-center">
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Typeform<br>respostas</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Shopify<br>vendas</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">ActiveCampaign<br>leads</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Calendly<br>reuniões</div>
+          </div>
+          <span class="text-neutral-600 text-xl">↓</span>
+          <div class="bg-orange-500/20 border border-orange-500/30 rounded-xl px-6 py-3 text-sm text-orange-400 font-bold">Zapier (6.000+ integrações)</div>
+          <span class="text-neutral-600 text-xl">↕ webhook</span>
+          <div class="bg-blue-600 text-white rounded-xl px-6 py-3 text-sm font-bold">Claude Code + Skill</div>
+          <span class="text-neutral-600 text-xl">↓</span>
+          <div class="flex gap-3 flex-wrap justify-center">
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Notion<br>salva análise</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Slack<br>notifica time</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Gmail<br>resposta auto</div>
+            <div class="bg-dark-700 border border-dark-600 rounded-lg px-3 py-2 text-xs text-neutral-400 text-center">Google Sheets<br>registra dado</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exemplo de Zap configurado (simulação HTML/CSS) -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs text-neutral-500 font-mono">Zap configurado — Conteúdo → Notion → Slack</span>
+          <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-1 rounded">Zapier</span>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-4 bg-dark-800 rounded-lg p-3 border border-dark-600">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-sm flex-shrink-0">1</div>
+            <div class="flex-1">
+              <div class="text-sm font-semibold text-white">Trigger: Webhook (Claude Code)</div>
+              <div class="text-xs text-neutral-400">Quando a skill "youtube-roteiro" gera um output, POST para webhook Zapier</div>
+            </div>
+            <div class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Ativo</div>
+          </div>
+          <div class="flex items-center space-x-4 bg-dark-800 rounded-lg p-3 border border-dark-600">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-sm flex-shrink-0">2</div>
+            <div class="flex-1">
+              <div class="text-sm font-semibold text-white">Ação 1: Criar página no Notion</div>
+              <div class="text-xs text-neutral-400">Database "Roteiros em Produção" → nova entrada com título, conteúdo e data</div>
+            </div>
+            <div class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Ativo</div>
+          </div>
+          <div class="flex items-center space-x-4 bg-dark-800 rounded-lg p-3 border border-dark-600">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-sm flex-shrink-0">3</div>
+            <div class="flex-1">
+              <div class="text-sm font-semibold text-white">Ação 2: Notificar no Slack</div>
+              <div class="text-xs text-neutral-400">Canal #conteudo → mensagem "Novo roteiro pronto: [título] — link do Notion"</div>
+            </div>
+            <div class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Ativo</div>
+          </div>
+          <div class="flex items-center space-x-4 bg-dark-800 rounded-lg p-3 border border-dark-600">
+            <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-sm flex-shrink-0">4</div>
+            <div class="flex-1">
+              <div class="text-sm font-semibold text-white">Ação 3: Adicionar ao Google Sheets</div>
+              <div class="text-xs text-neutral-400">Aba "Pipeline" → nova linha com: data, tema, palavras-chave, status "Em revisão"</div>
+            </div>
+            <div class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded">Ativo</div>
+          </div>
+        </div>
+        <div class="mt-3 bg-orange-900/20 rounded-lg p-3 border border-orange-500/20">
+          <p class="text-xs text-orange-400">⚠️ Latência do Zapier: dados via Zap podem ter atraso de 1-15 min no plano gratuito, até 2 min no plano pago. Para dados em tempo real, use MCP ou API direta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🏗️ Construindo um ecossistema de dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Um ecossistema de dados é o conjunto organizado de fontes, conectores e pipelines que alimenta todas as suas skills. Em vez de cada skill ter suas próprias conexões independentes, um ecossistema compartilha infraestrutura entre todas elas.</p>
+
+      <!-- Diagrama de arquitetura completa -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-5">Ecossistema completo — Criador de Conteúdo</h4>
+        <div class="space-y-4">
+          <!-- Camada 1: Fontes -->
+          <div>
+            <div class="text-xs text-neutral-500 uppercase tracking-wide mb-2">Camada 1 — Fontes de Dados</div>
+            <div class="flex gap-2 flex-wrap">
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-300">📊 YouTube Analytics API</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-300">📧 Gmail (e-mails de parceiros)</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-300">🔍 Firecrawl (blog Anthropic)</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-300">🌐 Brave Search (tendências)</div>
+            </div>
+          </div>
+          <div class="text-center text-neutral-600">↓ via MCP / API / Zapier ↓</div>
+          <!-- Camada 2: Armazenamento -->
+          <div>
+            <div class="text-xs text-neutral-500 uppercase tracking-wide mb-2">Camada 2 — Armazenamento</div>
+            <div class="flex gap-2 flex-wrap">
+              <div class="bg-blue-500/10 border border-blue-500/20 rounded px-3 py-1.5 text-xs text-blue-400">📁 /data/analytics/</div>
+              <div class="bg-blue-500/10 border border-blue-500/20 rounded px-3 py-1.5 text-xs text-blue-400">📁 /data/market-intel/</div>
+              <div class="bg-blue-500/10 border border-blue-500/20 rounded px-3 py-1.5 text-xs text-blue-400">📁 /data/partnerships/</div>
+              <div class="bg-blue-500/10 border border-blue-500/20 rounded px-3 py-1.5 text-xs text-blue-400">📁 /data/competitor/</div>
+            </div>
+          </div>
+          <div class="text-center text-neutral-600">↓ leitura de arquivo / query ↓</div>
+          <!-- Camada 3: Skills -->
+          <div>
+            <div class="text-xs text-neutral-500 uppercase tracking-wide mb-2">Camada 3 — Skills</div>
+            <div class="flex gap-2 flex-wrap">
+              <div class="bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1.5 text-xs text-emerald-400">youtube-roteiro.md</div>
+              <div class="bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1.5 text-xs text-emerald-400">market-radar.md</div>
+              <div class="bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1.5 text-xs text-emerald-400">parceiros-triagem.md</div>
+              <div class="bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1.5 text-xs text-emerald-400">competitor-watch.md</div>
+            </div>
+          </div>
+          <div class="text-center text-neutral-600">↓ outputs ↓</div>
+          <!-- Camada 4: Outputs -->
+          <div>
+            <div class="text-xs text-neutral-500 uppercase tracking-wide mb-2">Camada 4 — Outputs</div>
+            <div class="flex gap-2 flex-wrap">
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-400">📝 Roteiros prontos</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-400">📊 Relatórios semanais</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-400">📬 Respostas priorizadas</div>
+              <div class="bg-dark-700 border border-dark-600 rounded px-3 py-1.5 text-xs text-neutral-400">🎯 Alertas de oportunidade</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Template: mapa de dados -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">mapa-de-dados-template.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Template para preencher</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Mapa de Dados — [Seu Nome/Negócio]
+Data: ___________
+
+## FONTES QUE TENHO ACESSO HOJE
+| Fonte | Tipo | Conector disponível | Frequência de update |
+|-------|------|---------------------|----------------------|
+| [ex: YouTube Studio] | Analytics | API nativa | Diário |
+| [ex: Gmail] | E-mails | MCP Gmail | Tempo real |
+| [ex: Notion] | Docs/wiki | MCP Notion | Contínuo |
+| [ex: Google Drive] | Arquivos | MCP Drive | Contínuo |
+
+## FONTES QUE QUERO CONECTAR (PRÓXIMOS 30 DIAS)
+| Fonte | Por que é valiosa | Conector necessário |
+|-------|-------------------|---------------------|
+| [ex: Blog concorrente] | Monitorar novos produtos | Firecrawl |
+| [ex: Google Trends] | Detectar tendências | Brave Search |
+
+## SKILLS QUE SE BENEFICIAM DE CADA FONTE
+| Fonte | Skills que a usam |
+|-------|-------------------|
+| YouTube Analytics | youtube-performance, content-planning |
+| Gmail | lead-triage, partner-response |
+
+## GAPS IDENTIFICADOS
+Dados que eu precisaria mas não tenho acesso ainda:
+- [ex: métricas de concorrentes]
+- [ex: dados de busca por palavras-chave do meu nicho]</code></pre>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo 2.2</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skills cegas geram análises inúteis</strong><span class="text-neutral-400"> — o Rafael recebeu análise de IA citando GPT-4 como modelo mais avançado em 2026</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">MCP (conectores nativos)</strong><span class="text-neutral-400"> — configurado via settings.json: Gmail, Drive, GitHub, Figma, Firecrawl, Brave Search</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Fontes primárias por categoria</strong><span class="text-neutral-400">: IA (Anthropic blog, ArXiv), mercado (HN, PH), busca (Google Trends, SEMrush), newsletters</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">YouTube Analytics API</strong><span class="text-neutral-400"> — skill que coleta dados reais de performance e gera relatório semanal acionável</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Zapier</strong><span class="text-neutral-400"> — webhook para 6.000+ apps; exemplo: skill gera roteiro → salva no Notion → notifica no Slack</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Ecossistema em 4 camadas</strong><span class="text-neutral-400">: fontes → armazenamento → skills → outputs; dados compartilhados reduzem custo marginal</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">2.3 — Memory OS: construindo o sistema de memória de 3 buckets</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo Anterior</a>
+          <a href="modulo-2-3.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Super Skills 🧠 — Módulo 2.2 | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

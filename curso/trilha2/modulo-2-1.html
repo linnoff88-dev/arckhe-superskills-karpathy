@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.1 Criando a Skill Corretamente | Super Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Super Skills</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">4 Pilares</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Na Prática</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.1</span>
+    </div>
+  </nav>
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">❌ Pilar 1 — Criando a Skill Corretamente</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Por que não escrever skills manualmente, como usar o Skill Creator e como definir objetivo, formato de saída e contexto estratégico para uma skill eficaz.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">35</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Intermediário</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">❌ Por que não escrever skills manualmente</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Escrever uma skill "na mão" em 5 minutos parece eficiente — mas produz uma skill que falha silenciosamente. A armadilha é que você sabe exatamente o que quer, então o rascunho parece ótimo para você. O problema é que o Claude não é você.</p>
+
+      <!-- Cenário real da Ana -->
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-lg">👤</div>
+          <div>
+            <div class="font-semibold text-white">Ana Carvalho</div>
+            <div class="text-xs text-neutral-400">Analista de marketing em agência, cria skills de competidores</div>
+          </div>
+        </div>
+        <p class="text-neutral-300 text-sm italic mb-3">"Criei a skill de 'análise de concorrentes' em 5 minutos. Parecia completa. Na primeira vez que usei, recebi um relatório estruturado. Na segunda, veio em forma de perguntas. Na terceira, em bullet points genéricos sem nenhum dado. A mesma skill, três resultados completamente diferentes."</p>
+        <p class="text-neutral-400 text-xs">Problema raiz: Ana escreveu o objetivo mas esqueceu de especificar formato de saída, profundidade esperada e o que caracteriza uma "boa análise" para ela.</p>
+      </div>
+
+      <!-- Comparação 5 min vs 20 min -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">❌ Skill escrita em 5 minutos (manual)</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap"># Análise de Concorrentes
+
+Você é um analista de mercado.
+Quando eu pedir, analise o
+concorrente que eu mencionar.
+
+Foque em pontos fortes e fracos.
+Seja detalhado.</pre>
+          <div class="mt-3 text-xs text-red-400">Problemas: sem formato de saída, sem critério de "detalhado", sem contexto do negócio, sem profundidade mínima</div>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">✅ Skill criada com Skill Creator (20 minutos)</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap"># Análise de Concorrentes
+
+## OBJETIVO
+Analisar concorrentes diretos de uma
+agência de marketing digital B2B,
+produzindo relatório acionável para
+decisões de posicionamento.
+
+## OUTPUT FORMAT
+Relatório em markdown com 5 seções:
+1. Resumo Executivo (3 bullets)
+2. Posicionamento e Proposta de Valor
+3. Pontos Fortes (mín. 4 itens)
+4. Vulnerabilidades Exploráveis (mín. 3)
+5. Recomendações de Ação (mín. 3)
+
+Extensão total: 400-600 palavras.
+Tom: analítico, direto, executivo.
+
+## CRITÉRIOS DE QUALIDADE
+- Cada ponto forte cita evidência
+  observável (site, preço, copy)
+- Vulnerabilidades são oportunidades
+  reais, não críticas genéricas
+- Recomendações são específicas
+  e implementáveis em 30 dias</pre>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">🔍 O Que a Skill Manual Esqueceu</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-dark-800/60 rounded-lg p-3">
+            <div class="text-red-400 font-semibold text-sm mb-1">Formato de saída</div>
+            <div class="text-neutral-400 text-xs">Sem especificação, o Claude escolhe — e muda a cada sessão</div>
+          </div>
+          <div class="bg-dark-800/60 rounded-lg p-3">
+            <div class="text-red-400 font-semibold text-sm mb-1">Critérios de qualidade</div>
+            <div class="text-neutral-400 text-xs">"Detalhado" para você pode ser 100 ou 1.000 palavras</div>
+          </div>
+          <div class="bg-dark-800/60 rounded-lg p-3">
+            <div class="text-red-400 font-semibold text-sm mb-1">Contexto de uso</div>
+            <div class="text-neutral-400 text-xs">Para quem é o relatório? Qual a decisão que vai embasar?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🛠️ O Skill Creator do Claude</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O Skill Creator é uma ferramenta nativa do Claude Code que age como um consultor: ele faz as perguntas certas antes de escrever a especificação. Em vez de você tentar lembrar de tudo, o Skill Creator extrai por perguntas o que você não saberia que precisava especificar.</p>
+
+      <!-- Simulação de conversa com o Skill Creator -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">Conversa real com o Skill Creator</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Simulação</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 1/6 — Objetivo:</strong> O que esta skill deve fazer? Descreva em uma frase o que você quer que ela produza.</div>
+          </div>
+          <div class="flex items-start space-x-3 justify-end">
+            <div class="bg-dark-700 rounded-lg p-3 text-sm text-neutral-300 flex-1 text-right">Quero uma skill que crie roteiros para vídeos do YouTube sobre IA e produtividade.</div>
+            <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">👤</div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 2/6 — Resultado esperado:</strong> Como é o output ideal? Qual o formato, extensão e estrutura do roteiro perfeito para você?</div>
+          </div>
+          <div class="flex items-start space-x-3 justify-end">
+            <div class="bg-dark-700 rounded-lg p-3 text-sm text-neutral-300 flex-1 text-right">Roteiro com hook nos primeiros 30 segundos, desenvolvimento em tópicos, call-to-action no final. Uns 800 a 1.200 palavras.</div>
+            <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">👤</div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 3/6 — Audiência:</strong> Para quem é o conteúdo? Qual o perfil de quem assiste seus vídeos?</div>
+          </div>
+          <div class="flex items-start space-x-3 justify-end">
+            <div class="bg-dark-700 rounded-lg p-3 text-sm text-neutral-300 flex-1 text-right">Profissionais de 25-40 anos que querem usar IA no trabalho mas não são técnicos. Sem jargão, exemplos práticos.</div>
+            <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">👤</div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 4/6 — Critérios de qualidade:</strong> Como você sabe se um roteiro ficou bom? O que distingue excelente de medíocre?</div>
+          </div>
+          <div class="flex items-start space-x-3 justify-end">
+            <div class="bg-dark-700 rounded-lg p-3 text-sm text-neutral-300 flex-1 text-right">Hook que gera curiosidade real, não clickbait. Cada tópico com exemplo concreto. Final com ação específica que a pessoa pode fazer hoje.</div>
+            <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">👤</div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 5/6 — Restrições:</strong> O que esta skill NUNCA deve fazer? Comportamentos a evitar, temas proibidos, tons inadequados?</div>
+          </div>
+          <div class="flex items-start space-x-3 justify-end">
+            <div class="bg-dark-700 rounded-lg p-3 text-sm text-neutral-300 flex-1 text-right">Nunca prometer que IA vai substituir empregos. Não usar termos como "revolucionar" ou "game-changer". Não fazer listas com mais de 5 itens.</div>
+            <div class="w-6 h-6 rounded-full bg-neutral-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">👤</div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs text-blue-400 flex-shrink-0 mt-0.5">SC</div>
+            <div class="bg-blue-900/20 rounded-lg p-3 text-sm text-neutral-300 flex-1"><strong class="text-blue-400">Pergunta 6/6 — Contexto de negócio:</strong> Qual o nome do canal, posicionamento, e algum detalhe que diferencia seu conteúdo dos concorrentes?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arquivo .md gerado -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">youtube-roteiro.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill File gerado</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># YouTube Roteiro — Canal IA na Prática
+
+## IDENTIDADE DO CANAL
+Canal "IA na Prática" — 47k inscritos, foco em profissionais
+não-técnicos que querem usar IA no trabalho diário.
+Diferencial: exemplos reais, sem hype, sem jargão.
+
+## OBJETIVO
+Criar roteiro completo para vídeo de 8-12 minutos sobre
+um tema de IA/produtividade, otimizado para retenção
+e conversão de inscrição.
+
+## PERFIL DA AUDIÊNCIA
+- Profissionais 25-40 anos, cargos: gerente, analista, consultor
+- Usam ferramentas básicas (Office, Notion) mas não codificam
+- Motivação: economizar tempo, parecer atualizado para gestores
+- Medo: ficar obsoleto, não saber por onde começar
+
+## OUTPUT FORMAT
+### Estrutura obrigatória:
+1. HOOK (0-30 segundos): pergunta ou afirmação que gera tensão
+2. PROMESSA (30-60 segundos): o que a pessoa vai aprender/ganhar
+3. DESENVOLVIMENTO: 3-4 tópicos, cada um com exemplo concreto
+4. VIRADA: insight inesperado que eleva o conteúdo
+5. CTA: ação específica que a pessoa pode fazer hoje
+
+### Especificações técnicas:
+- Extensão: 800-1.200 palavras
+- Tom: direto e prático, como um colega experiente explicando
+- Sem bullet lists com mais de 5 itens
+- Cada tópico do desenvolvimento: 150-200 palavras
+
+## CRITÉRIOS DE QUALIDADE
+- Hook gera curiosidade genuína, não clickbait
+- Pelo menos 2 exemplos com números ou situações reais
+- CTA é ação de 5 minutos ou menos (não "comece a usar IA")
+- Nenhuma lista no desenvolvimento (apenas prosa fluida)
+
+## PROIBIÇÕES ABSOLUTAS
+- Nunca mencionar "substituição de empregos"
+- Palavras banidas: revolucionar, game-changer, disruptivo, incrível
+- Não fazer previsões sobre o futuro da IA
+- Não citar ferramentas pagas sem mencionar alternativa gratuita</code></pre>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🎯 Definindo objetivo e resultado esperado</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">A clareza do objetivo é o fator mais preditivo da qualidade do output. Skills com objetivos vagos produzem resultados vagos não porque o Claude é incapaz, mas porque ambiguidade instrucional é resolvida com interpretação — que raramente coincide com sua expectativa.</p>
+
+      <!-- Template de briefing de skill -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">briefing-skill-template.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Template</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## BRIEFING DE SKILL
+
+**Nome da skill:** [nome-descritivo-sem-espacos]
+**Data de criação:** [data]
+**Versão:** 1.0
+
+### 1. OBJETIVO PRINCIPAL
+[Verbo de ação] + [o quê] + [para quem] + [para que finalidade]
+Exemplo: "Criar roteiro de 800-1200 palavras para profissional
+não-técnico que quer postar vídeo sobre IA no YouTube semanal."
+
+### 2. RESULTADO ESPERADO
+- Formato físico: [markdown / texto / JSON / HTML]
+- Estrutura: [seções obrigatórias com ordem]
+- Extensão: [mínimo e máximo em palavras]
+- Tom: [adjetivos que descrevem a voz]
+- Exemplo do output ideal: [descrever ou colar exemplo]
+
+### 3. CONTEXTO DE USO
+- Quem usa esta skill: [nome/papel]
+- Quando usa: [frequência, ocasião]
+- O que faz com o output: [próximo passo após usar]
+
+### 4. CRITÉRIO DE DONE
+Um output está concluído quando: [descrever condição]
+Um output está ruim quando: [descrever condição de falha]
+
+### 5. RESTRIÇÕES
+- Nunca fazer: [lista de comportamentos proibidos]
+- Tom proibido: [descrição de voz inadequada]
+- Temas a evitar: [assuntos fora do escopo]</code></pre>
+      </div>
+
+      <!-- Comparação objetivo vago vs objetivo preciso -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">❌ Objetivo vago</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap">## OBJETIVO
+Você é um assistente de marketing.
+Ajude a criar conteúdo para redes
+sociais quando eu pedir.</pre>
+          <div class="mt-3 space-y-1">
+            <div class="text-xs text-red-400">✗ "Conteúdo" — qual tipo? Post? Thread? Carrossel?</div>
+            <div class="text-xs text-red-400">✗ "Redes sociais" — qual plataforma?</div>
+            <div class="text-xs text-red-400">✗ "Quando eu pedir" — sem contexto de uso</div>
+          </div>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">✅ Objetivo preciso</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap">## OBJETIVO
+Criar thread de 8-10 posts para LinkedIn
+de um fundador de startup SaaS B2B que
+quer compartilhar aprendizados de growth.
+Audiência: outros fundadores e C-levels.
+Frequência: 2x por semana.
+Métrica: taxa de engajamento > 3%.</pre>
+          <div class="mt-3 space-y-1">
+            <div class="text-xs text-blue-400">✓ Formato específico (thread 8-10 posts)</div>
+            <div class="text-xs text-blue-400">✓ Plataforma definida (LinkedIn)</div>
+            <div class="text-xs text-blue-400">✓ Audiência clara (fundadores/C-levels)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📋 Formato de saída e critérios de qualidade</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O formato de saída é o contrato da skill. Sem especificação explícita, o Claude escolhe o formato que parece mais razoável — e "razoável" é subjetivo. Com especificação precisa, o output é consistente independente da sessão ou da pessoa que usa.</p>
+
+      <!-- Bloco de código: seção OUTPUT FORMAT real -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">analise-mercado.md — seção OUTPUT FORMAT</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## OUTPUT FORMAT
+
+### Estrutura obrigatória (nesta ordem):
+```
+# [TÍTULO DA ANÁLISE] — [Data]
+
+## Resumo Executivo
+[3 bullets com os insights mais críticos]
+
+## Tamanho e Crescimento do Mercado
+[1 parágrafo, 80-120 palavras, com números]
+
+## Tendências Dominantes (3-5)
+[Cada tendência: nome em negrito + 2-3 frases de explicação]
+
+## Oportunidades para [Nome da Empresa]
+[3 oportunidades específicas com raciocínio]
+
+## Riscos e Ameaças
+[2-3 riscos com probabilidade: Alta/Média/Baixa]
+
+## Recomendação de Ação (próximos 90 dias)
+[1 ação principal com justificativa de 50 palavras]
+```
+
+### Especificações de formato:
+- Total: 500-700 palavras
+- Todos os números com fonte entre parênteses
+- Tom: executivo, objetivo, sem jargão técnico
+- Usar markdown: H2 para seções, negrito para termos-chave
+- Proibido: bullet com mais de 8 itens, parágrafos com + de 5 linhas
+
+### Critérios de qualidade:
+- APROVADO: cada tendência cita dado observável do mercado
+- APROVADO: oportunidades são específicas para este negócio
+- REPROVADO: análise poderia ser de qualquer empresa do setor
+- REPROVADO: recomendação final é genérica ("investir em IA")</code></pre>
+      </div>
+
+      <!-- 3 runs: sem critérios vs com critérios -->
+      <h3 class="text-lg font-semibold text-neutral-200 mb-4">O que acontece sem vs com critérios de qualidade:</h3>
+      <div class="space-y-3 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-red-500/20 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded font-mono">Run #1 — sem critérios</span>
+          </div>
+          <p class="text-xs text-neutral-400 font-mono">O mercado de IA está em crescimento acelerado. As principais tendências incluem automação, LLMs e agentes. Há oportunidades para empresas que investirem nessas tecnologias. Recomendo estudar o mercado e definir uma estratégia.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-yellow-500/20 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded font-mono">Run #2 — sem critérios (mesmo input)</span>
+          </div>
+          <p class="text-xs text-neutral-400 font-mono">**Análise do Mercado de IA**. Tendências: 1) Adoção corporativa crescendo 45% ao ano 2) Modelos multimodais 3) IA embarcada em produtos. Oportunidades identificadas no setor B2B SaaS. Riscos: regulação, custo de implementação.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-blue-500/30 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-mono">Run #1 — com critérios definidos</span>
+          </div>
+          <p class="text-xs text-neutral-300 font-mono"># Análise de Mercado — IA Produtividade B2B — Abril 2026<br><br>## Resumo Executivo<br>• Mercado de ferramentas de IA B2B atingiu $47B em 2025, crescimento de 62% YoY (Gartner)<br>• 73% das empresas Fortune 500 já têm projeto de IA em produção (McKinsey Q1/2026)<br>• Janela de vantagem competitiva para early adopters: estimada em 18-24 meses</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🏢 Contexto estratégico — O ingrediente secreto</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O contexto estratégico transforma uma skill de ferramenta genérica em ativo proprietário do negócio. É o conjunto de informações que fariam um funcionário recém-contratado trabalhar com a mesma qualidade de alguém que está na empresa há 3 anos.</p>
+
+      <!-- Comparação: versão genérica vs versão com contexto -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">❌ Versão genérica (5 linhas)</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap"># YouTube Script Writer
+
+Você é um redator de YouTube.
+Escreva roteiros sobre tecnologia.
+Seja informativo e engajante.
+Use linguagem clara.
+Inclua call-to-action no final.</pre>
+          <div class="mt-3 text-xs text-red-400">Poderia ser usado por qualquer criador de conteúdo do planeta. Zero diferencial.</div>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">✅ Com contexto estratégico (40+ linhas)</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap"># YouTube Roteiro — Canal Marcos Cunha
+
+## CONTEXTO DO CANAL
+Canal: "Marcos Cunha — IA no Trabalho"
+Inscritos: 89k | Crescimento: +2.3k/mês
+Monetização: curso + consultoria B2B
+Meta 2026: 150k inscritos, 3x receita
+
+## POSICIONAMENTO
+"O canal para profissionais sérios que
+querem resultado, não hype."
+Diferencial vs concorrentes: não ensino
+ferramentas, ensino sistemas completos.
+
+## AUDIÊNCIA DOCUMENTADA
+Persona primária — "O Gerente Ansioso":
+- Cargo: gerente/coordenador 30-42 anos
+- Dor: equipe cobrando sobre IA, chefe
+  perguntando o que está fazendo
+- Objetivo: implementar IA sem virar
+  técnico ou depender de TI
+- Redes: LinkedIn (diário), YouTube
+  (busca solução para problema específico)
+...</pre>
+        </div>
+      </div>
+
+      <!-- Skill file COMPLETO com contexto estratégico real -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">youtube-roteiro-contexto-completo.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Skill File Completo</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># YouTube Roteiro — Canal Marcos Cunha
+
+## [CONTEXTO: NEGÓCIO] ← Camada 1
+Canal: "Marcos Cunha — IA no Trabalho" | 89k inscritos
+Modelo: YouTube → audiência gratuita → curso R$997 → consultoria B2B
+Receita atual: R$28k/mês | Meta: R$85k/mês até Dez/2026
+CTR médio dos últimos 30 vídeos: 4.2% | Retenção média: 52%
+
+## [CONTEXTO: AUDIÊNCIA] ← Camada 2
+Persona: "O Gerente Ansioso"
+- Gerente/coordenador, 30-42 anos, empresas 50-500 funcionários
+- Usa: Office, Teams, Notion; não usa: Python, APIs, código
+- Medo primário: ficar obsoleto enquanto a equipe avança
+- Gatilho de compra: quando sente que está atrasado em relação a pares
+- Objeção principal: "muito complexo para minha realidade"
+
+## [CONTEXTO: HISTÓRICO] ← Camada 3
+Vídeos com melhor performance (últimos 6 meses):
+- "Como organizo meu trabalho com 3 ferramentas de IA" → 187k views
+- "Testei 10 prompts de produtividade: só 3 funcionam" → 143k views
+- "IA para reuniões: o que realmente economiza tempo" → 98k views
+Padrão dos top performers: título com número + promessa específica + desmistificação
+
+Vídeos que não funcionaram:
+- Tutoriais técnicos passo-a-passo → audiência não é técnica
+- Análises de notícias de IA → audiência quer aplicação, não notícia
+
+## [CONTEXTO: RESTRIÇÕES] ← Camada 4
+NUNCA mencionar:
+- Substituição de empregos por IA
+- Ferramentas que custam +R$200/mês sem alternativa gratuita
+- Comparações com concorrentes específicos por nome
+- Previsões sobre futuro da IA além de 12 meses
+
+TOM PROIBIDO: hype, jargão técnico, academicismo, superlativos
+
+## OBJETIVO
+Criar roteiro de 800-1.200 palavras para vídeo de 8-12 minutos que:
+1. Resolve uma dor específica do Gerente Ansioso
+2. Demonstra aplicação prática (não teoria)
+3. Tem hook que funciona no YouTube (curiosidade + tensão)
+
+## OUTPUT FORMAT
+### Estrutura:
+TÍTULO SUGERIDO: [3 opções A/B/C para teste]
+THUMBNAIL CONCEPT: [descrição de visual para designer]
+---
+[HOOK — 0:00-0:45]
+[PROMESSA — 0:45-1:30]
+[TÓPICO 1 — 1:30-4:00]
+[TÓPICO 2 — 4:00-7:00]
+[TÓPICO 3 — 7:00-10:00]
+[VIRADA — 10:00-11:00]
+[CTA — 11:00-12:00]
+
+### Notas no roteiro:
+[Indicar B-roll sugerido entre colchetes]
+[Indicar pausa para respirar com (pausa)]</code></pre>
+      </div>
+
+      <!-- Destaque de cada seção de contexto -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 mb-6">
+        <div class="bg-dark-800 rounded-lg p-3 border border-blue-500/20">
+          <div class="text-blue-400 font-semibold text-xs mb-1">Camada 1 — Negócio</div>
+          <div class="text-neutral-400 text-xs">Métricas reais, modelo de receita, metas quantificadas</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-3 border border-blue-500/20">
+          <div class="text-blue-400 font-semibold text-xs mb-1">Camada 2 — Audiência</div>
+          <div class="text-neutral-400 text-xs">Persona nomeada com medos, objetivos e objeções reais</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-3 border border-blue-500/20">
+          <div class="text-blue-400 font-semibold text-xs mb-1">Camada 3 — Histórico</div>
+          <div class="text-neutral-400 text-xs">O que funcionou, o que falhou, com dados de performance</div>
+        </div>
+        <div class="bg-dark-800 rounded-lg p-3 border border-blue-500/20">
+          <div class="text-blue-400 font-semibold text-xs mb-1">Camada 4 — Restrições</div>
+          <div class="text-neutral-400 text-xs">Proibições explícitas de conteúdo, tom e comportamento</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">✅ Validando sua skill antes de usar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Uma skill não testada é uma hipótese em produção. Validação sistemática antes do uso real transforma a skill de uma aposta em uma ferramenta confiável. O custo de um teste de 30 minutos é infinitamente menor que o custo de um erro em um momento crítico.</p>
+
+      <!-- Checklist visual de validação -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Checklist de Validação — execute antes do uso real</h3>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-blue-400 bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </div>
+            <span class="text-sm text-neutral-300"><strong class="text-white">Teste de caso normal:</strong> input padrão → output atende o formato especificado?</span>
+          </div>
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-blue-400 bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </div>
+            <span class="text-sm text-neutral-300"><strong class="text-white">Teste de edge case #1:</strong> input fora do padrão (muito curto, ambíguo, outro idioma)</span>
+          </div>
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-blue-400 bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </div>
+            <span class="text-sm text-neutral-300"><strong class="text-white">Teste de consistência:</strong> 3 runs com o mesmo input → outputs têm a mesma estrutura?</span>
+          </div>
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-neutral-600 flex-shrink-0"></div>
+            <span class="text-sm text-neutral-400"><strong class="text-neutral-300">Verificação de contexto:</strong> o output usa informações específicas do contexto ou é genérico?</span>
+          </div>
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-neutral-600 flex-shrink-0"></div>
+            <span class="text-sm text-neutral-400"><strong class="text-neutral-300">Verificação de restrições:</strong> o output viola alguma das proibições definidas?</span>
+          </div>
+          <div class="flex items-center space-x-3 p-3 bg-dark-700 rounded-lg">
+            <div class="w-5 h-5 rounded border-2 border-neutral-600 flex-shrink-0"></div>
+            <span class="text-sm text-neutral-400"><strong class="text-neutral-300">Teste de carga:</strong> funciona bem com input 3x mais longo que o normal?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Template de test suite -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">youtube-roteiro-tests.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Test Suite</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Test Suite — YouTube Roteiro Skill
+Data de criação: 2026-04-01 | Versão da skill: 1.0
+
+## TESTE 1 — Caso Normal
+Input: "Como usar o Claude Code para automatizar tarefas repetitivas"
+Output esperado:
+  - 3 opções de título com número
+  - Estrutura com 7 seções marcadas (HOOK, PROMESSA, etc.)
+  - Extensão 800-1.200 palavras
+  - Mínimo 1 exemplo com situação concreta
+  - CTA para ação de 5 minutos ou menos
+Status: [ ] PASSOU  [ ] FALHOU
+Notas: ___________________
+
+## TESTE 2 — Edge Case: Input muito vago
+Input: "IA"
+Output esperado:
+  - Skill deve pedir clarificação OU
+  - Escolher subtema específico e avisar escolha
+  - NÃO deve gerar roteiro genérico sobre "tudo de IA"
+Status: [ ] PASSOU  [ ] FALHOU
+Notas: ___________________
+
+## TESTE 3 — Verificação de restrições
+Input: "Como a IA vai substituir empregos nos próximos 5 anos"
+Output esperado:
+  - Skill deve redirecionar para ângulo de oportunidade
+  - NÃO deve criar roteiro sobre substituição de empregos
+  - NÃO deve usar palavras como "revolucionar"
+Status: [ ] PASSOU  [ ] FALHOU
+Notas: ___________________
+
+## RESULTADO FINAL
+Testes aprovados: ___ / 3
+Aprovado para uso em produção: [ ] SIM  [ ] NÃO
+Data de próximo review: ___________</code></pre>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo 2.1</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Não escrever manualmente</strong><span class="text-neutral-400"> — a skill de 5 minutos da Ana produzia 3 outputs completamente diferentes para o mesmo input</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skill Creator</strong><span class="text-neutral-400"> — 6 perguntas estruturadas que extraem o que você não saberia que precisava especificar</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Briefing de skill</strong><span class="text-neutral-400"> com objetivo, resultado esperado, contexto, critério de done e restrições</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">OUTPUT FORMAT preciso</strong><span class="text-neutral-400"> — estrutura obrigatória, extensão, tom, e critérios de APROVADO/REPROVADO</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Contexto em 4 camadas</strong><span class="text-neutral-400">: negócio (métricas reais), audiência (persona com medos), histórico (o que funcionou) e restrições</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Test suite</strong><span class="text-neutral-400"> — 3 testes mínimos antes de ir para produção: caso normal, edge case, verificação de restrições</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">2.2 — Ferramentas e Dados: conectando skills a fontes externas em tempo real</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 2</a>
+          <a href="modulo-2-2.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Super Skills 🧠 — Módulo 2.1 | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos | Super Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .bg-emerald-500\/20 { background-color: rgba(5, 150, 105, 0.12); }
+    html:not(.dark) .bg-emerald-500\/10 { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .border-emerald-500\/30 { border-color: rgba(5, 150, 105, 0.25); }
+    html:not(.dark) .hover\:bg-emerald-500\/30:hover { background-color: rgba(5, 150, 105, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">Super Skills</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-emerald-400 bg-emerald-500/10">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">4 Pilares</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Na Prática</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full mb-4">TRILHA 1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📚 Fundamentos</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Entenda o problema das skills comuns, conheça os 4 princípios do método Karpathy e aprenda a diferença crucial entre utility skills e super skills.
+      </p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">3</div>
+          <div class="text-xs text-neutral-400">Módulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">18</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">~1h30</div>
+          <div class="text-xs text-neutral-400">Duração</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-emerald-400">Iniciante</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- PROGRESSO VISUAL -->
+    <div class="mb-10 flex items-center space-x-2 overflow-x-auto pb-1">
+      <div class="flex items-center space-x-2 flex-shrink-0">
+        <span class="px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 text-sm font-bold border border-emerald-500/40">Fundamentos (T1)</span>
+      </div>
+      <div class="flex-shrink-0 text-neutral-600 text-lg">→</div>
+      <div class="flex items-center space-x-2 flex-shrink-0">
+        <span class="px-4 py-2 rounded-lg bg-dark-700 text-neutral-500 text-sm font-medium border border-dark-600">Os 4 Pilares (T2)</span>
+      </div>
+      <div class="flex-shrink-0 text-neutral-600 text-lg">→</div>
+      <div class="flex items-center space-x-2 flex-shrink-0">
+        <span class="px-4 py-2 rounded-lg bg-dark-700 text-neutral-500 text-sm font-medium border border-dark-600">Na Prática (T3)</span>
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO RÁPIDA -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold mb-6 text-neutral-300">Navegação Rápida</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="modulo-1-1.html" class="bg-dark-800 rounded-lg border border-dark-600 hover:border-emerald-500/30 p-4 transition-colors">
+          <div class="text-emerald-400 font-bold text-sm mb-1">1.1</div>
+          <div class="font-medium mb-2">🧩 O Problema das Skills Comuns</div>
+          <p class="text-xs text-emerald-400/70 italic">Descubra por que suas skills atuais estão desperdiçando 43h/ano</p>
+        </a>
+        <a href="modulo-1-2.html" class="bg-dark-800 rounded-lg border border-dark-600 hover:border-emerald-500/30 p-4 transition-colors">
+          <div class="text-emerald-400 font-bold text-sm mb-1">1.2</div>
+          <div class="font-medium mb-2">🤔 A Base Karpathy — 4 Princípios</div>
+          <p class="text-xs text-emerald-400/70 italic">Os 4 princípios Karpathy que mudam como o Claude pensa</p>
+        </a>
+        <a href="modulo-1-3.html" class="bg-dark-800 rounded-lg border border-dark-600 hover:border-emerald-500/30 p-4 transition-colors">
+          <div class="text-emerald-400 font-bold text-sm mb-1">1.3</div>
+          <div class="font-medium mb-2">🔧 Utility Skills vs Super Skills</div>
+          <p class="text-xs text-emerald-400/70 italic">O framework para nunca mais construir a skill errada</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- PRÉ-REQUISITO -->
+    <div class="bg-primary/10 border border-primary/40 rounded-xl p-5 mb-8">
+      <div class="flex items-start space-x-3">
+        <span class="text-2xl flex-shrink-0">💡</span>
+        <div>
+          <h3 class="font-bold text-primary mb-1">Pré-requisito desta trilha</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">Você precisa ter o Claude Code instalado e um projeto aberto. Se ainda não tem, veja o guia em <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 font-medium">INEMA.CLUB</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center mb-8">
+      <div class="flex-1 border-t border-dark-600"></div>
+      <span class="px-4 text-neutral-500 text-sm">Conteúdo Detalhado</span>
+      <div class="flex-1 border-t border-dark-600"></div>
+    </div>
+
+    <!-- MÓDULO 1.1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold">1.1</span>
+          <span class="text-xs text-neutral-500">~30 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🧩 O Problema das Skills Comuns</h3>
+        <p class="text-neutral-400 text-sm">Por que a maioria das skills falha e como identificar os problemas fundamentais que impedem resultados profissionais.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🧩</span>
+            <div><span class="font-medium">O que é uma "skill" no Claude Code</span><span class="text-neutral-500 text-sm ml-2">— Blocos de comportamento especializados</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma skill é um arquivo Markdown salvo em <code class="bg-dark-600 px-1 rounded text-emerald-300">.claude/skills/nome-skill.md</code> que instrui o Claude Code como executar uma tarefa específica. Você a invoca digitando <code class="bg-dark-600 px-1 rounded text-emerald-300">/nome-skill</code> no chat.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem entender o que é uma skill no nível técnico, você vai criar arquivos que parecem skills mas são apenas prompts — e vai se perguntar por que os resultados variam tanto a cada uso.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">.claude/skills/</code>, disparo via <code class="bg-dark-600 px-1 rounded text-emerald-300">/nome-skill</code>, contexto de projeto, arquivo <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code>.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">💔</span>
+            <div><span class="font-medium">Por que a maioria das skills falha</span><span class="text-neutral-500 text-sm ml-2">— O problema do prompt genérico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Skills comuns são apenas prompts salvos em arquivo. Exemplo típico: <code class="bg-dark-600 px-1 rounded text-emerald-300">Você é um especialista em conteúdo. Escreva sobre $TEMA.</code> — sem canal, sem audiência, sem histórico, sem voz.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Estudos de uso mostram que criadores perdem em média <strong class="text-neutral-200">43 horas por ano</strong> reescrevendo e corrigindo outputs de skills genéricas. Identificar as falhas é o primeiro passo para eliminá-las.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">falta de contexto estratégico, ausência de dados reais, sem ciclo de melhoria, prompts genéricos, <code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code>.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">⚡</span>
+            <div><span class="font-medium">O potencial desperdiçado</span><span class="text-neutral-500 text-sm ml-2">— Superpoderes mal configurados</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O Claude Code pode ler arquivos, buscar na web, executar código e encadear decisões. Uma skill fraca ignora tudo isso e o reduz a <code class="bg-dark-600 px-1 rounded text-emerald-300">autocomplete com mais tokens</code>.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada skill sem ferramentas é um funcionário digital sem acesso ao computador — presente na sala, mas inútil para o trabalho real. O custo de oportunidade é enorme.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">agente vs. autocomplete, ferramentas nativas do Claude Code, custo de oportunidade, <code class="bg-dark-600 px-1 rounded text-emerald-300">WebFetch</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">Read/Write</code>.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Skills sem contexto estratégico</span><span class="text-neutral-500 text-sm ml-2">— O erro mais caro</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Uma skill para YouTube sem saber o canal, audiência, estilo e histórico é idêntica ao que qualquer pessoa digitaria no ChatGPT. O arquivo <code class="bg-dark-600 px-1 rounded text-emerald-300">context/canal.md</code> com dados do negócio é o que gera personalização real.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O contexto estratégico é o que diferencia uma super skill de uma ferramenta de commodity — e é <strong class="text-neutral-200">impossível de copiar</strong> por concorrentes, porque contém o DNA do seu negócio.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">context/canal.md</code>, perfil da audiência, objetivos estratégicos, histórico de feedback, <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code>.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🔄</span>
+            <div><span class="font-medium">Skills que esquecem tudo</span><span class="text-neutral-500 text-sm ml-2">— O problema da memória zero</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada invocação de uma skill comum começa do zero. Você aprovou um formato de post na semana passada? A skill não sabe. Sem um arquivo <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code>, cada sessão reinventa a roda.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Skills sem memória forçam você a reexplicar o contexto toda vez — o equivalente a demitir e contratar um novo funcionário a cada reunião. O Memory OS resolve isso com <strong class="text-neutral-200">zero esforço extra</strong> por uso.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">memória efêmera, ausência de aprendizado, <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code>, contexto perdido, aprendizado acumulado.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔧</span>
+            <div><span class="font-medium">Skills que não usam ferramentas</span><span class="text-neutral-500 text-sm ml-2">— Cegos sem dados</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Skills que dependem só do conhecimento interno do modelo são cegas para o mundo real. Uma skill de análise de tendências que não usa <code class="bg-dark-600 px-1 rounded text-emerald-300">WebFetch</code> ou um arquivo <code class="bg-dark-600 px-1 rounded text-emerald-300">signals/trends.json</code> está operando com dados de corte de treino, não de hoje.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Conectar skills a fontes reais é o que transforma opiniões em análises fundamentadas. Uma skill com dados vence qualquer skill genérica em qualidade de output — <strong class="text-neutral-200">100% das vezes</strong>.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">WebFetch</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">signals/trends.json</code>, APIs externas, fontes primárias, dados em tempo real.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-1-1.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo →</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold">1.2</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🤔 A Base Karpathy — 4 Princípios</h3>
+        <p class="text-neutral-400 text-sm">Os quatro princípios fundamentais de Andrej Karpathy que transformam o uso do Claude Code em resultados profissionais e consistentes.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🤔</span>
+            <div><span class="font-medium">Think Before Coding</span><span class="text-neutral-500 text-sm ml-2">— Pensar antes de agir</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A IA deve entender completamente o problema antes de agir. Na prática: sua skill começa com uma seção <code class="bg-dark-600 px-1 rounded text-emerald-300">## Contexto</code> que define exatamente o que é esperado antes de qualquer instrução de execução.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Skills que pulam a fase de entendimento produzem outputs incorretos 70% mais frequentemente. Um bloco <code class="bg-dark-600 px-1 rounded text-emerald-300">## Objetivo</code> bem escrito elimina a ambiguidade antes que ela vire retrabalho.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">seção <code class="bg-dark-600 px-1 rounded text-emerald-300">## Contexto</code>, análise prévia, prevenção de erros, <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> com princípios.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">✂️</span>
+            <div><span class="font-medium">Simplicity First</span><span class="text-neutral-500 text-sm ml-2">— Simplicidade acima de tudo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Resolver com a solução mais simples possível. Uma skill de 15 linhas que funciona bate uma de 80 linhas que às vezes falha. Evite seções <code class="bg-dark-600 px-1 rounded text-emerald-300">## Regras Avançadas</code> que nunca são lidas.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Skills complexas quebram 3x mais durante atualizações e são 5x mais difíceis de depurar. A simplicidade não é limitação — é estratégia de manutenção de longo prazo.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">YAGNI (You Aren't Gonna Need It), skill mínima viável, legibilidade sobre elegância, <code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code> como exemplo.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🔪</span>
+            <div><span class="font-medium">Surgical Changes</span><span class="text-neutral-500 text-sm ml-2">— Mudanças cirúrgicas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Ao atualizar uma skill, altere apenas a seção problemática. Se o tom do output está errado, ajuste só a seção <code class="bg-dark-600 px-1 rounded text-emerald-300">## Tom e Voz</code> — não reescreva o arquivo inteiro.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mudanças amplas em skills funcionando introduzem regressões invisíveis. Uma edição cirúrgica preserva o que funciona e isola o que precisa mudar, reduzindo o risco de quebrar outputs aprovados.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">escopo mínimo de edição, <code class="bg-dark-600 px-1 rounded text-emerald-300">## Tom e Voz</code>, efeitos colaterais, rastreabilidade de mudanças.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🎯</span>
+            <div><span class="font-medium">Goal-Driven Execution</span><span class="text-neutral-500 text-sm ml-2">— Execução orientada a metas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Toda skill deve ter uma seção <code class="bg-dark-600 px-1 rounded text-emerald-300">## Critérios de Sucesso</code> com condições verificáveis. Exemplo: <em class="text-neutral-400">"O output deve conter título, 3 tópicos e CTA — se faltar qualquer um, a skill falhou."</em></p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem critérios objetivos, você nunca sabe se uma skill está "boa o suficiente". Com eles, a validação é binária e o ciclo de melhoria fica <strong class="text-neutral-200">10x mais rápido</strong>.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">## Critérios de Sucesso</code>, definição de done, checklist de validação, <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code> para registrar resultados.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📄</span>
+            <div><span class="font-medium">O arquivo claude.md</span><span class="text-neutral-500 text-sm ml-2">— A base de tudo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">O arquivo <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> na raiz do projeto define regras globais que valem para toda interação. É onde você escreve: <em class="text-neutral-400">"Antes de agir, leia o contexto em context/canal.md"</em> — e isso vale para todas as skills do projeto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> é o multiplier: configure uma vez, aplica-se a todas as skills. Sem ele, você repete as mesmas instruções em cada skill — e qualquer atualização precisa ser feita 6 vezes.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code>, instrução persistente, configuração global de projeto, princípios automatizados, <code class="bg-dark-600 px-1 rounded text-emerald-300">context/</code> pasta.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🚀</span>
+            <div><span class="font-medium">Aplicando Karpathy no seu fluxo</span><span class="text-neutral-500 text-sm ml-2">— Implementação prática</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">A tradução dos 4 princípios em comportamentos concretos: criar o <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> com regras Karpathy, montar a pasta <code class="bg-dark-600 px-1 rounded text-emerald-300">context/</code> com dados do negócio e testar o ciclo completo com uma skill real.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Princípios sem implementação são filosofia. Com o template de <code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> deste módulo, você sai com um projeto configurado e pronto para construir sua primeira super skill.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">claude.md</code> template, pasta <code class="bg-dark-600 px-1 rounded text-emerald-300">context/</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code>, checklist de qualidade, fluxo de verificação.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-1-2.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo →</a>
+      </div>
+    </div>
+
+    <!-- MÓDULO 1.3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-emerald-400 font-bold">1.3</span>
+          <span class="text-xs text-neutral-500">~30 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🔧 Utility Skills vs Super Skills</h3>
+        <p class="text-neutral-400 text-sm">Aprenda a distinguir quando usar uma utility skill simples e quando investir na construção de uma super skill estratégica.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🔧</span>
+            <div><span class="font-medium">Utility Skills</span><span class="text-neutral-500 text-sm ml-2">— Ferramentas simples e diretas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Skills que executam uma tarefa pequena e previsível. Exemplo: <code class="bg-dark-600 px-1 rounded text-emerald-300">formatar-markdown.md</code> que converte texto bruto em Markdown padronizado — entrada e saída sempre iguais, sem necessidade de contexto do negócio.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Confundir utility com super skill é um erro caro: você gasta horas construindo contexto e memória para uma tarefa que não precisa de nada disso — e o resultado não melhora.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">formatar-markdown.md</code>, tarefa única, entrada/saída previsível, baixo contexto, alta reprodutibilidade.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🧠</span>
+            <div><span class="font-medium">Super Skills</span><span class="text-neutral-500 text-sm ml-2">— Sistemas estratégicos vivos</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Skills com contexto estratégico, dados externos e memória persistente. O <code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code> é um exemplo: lê tendências de mercado, cruza com dados do seu nicho e gera análise personalizada — impossível de replicar sem seu contexto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Super skills são ativos que crescem em valor a cada uso. Após 30 execuções, o <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code> acumula decisões e preferências que tornam cada output mais preciso — sem esforço adicional seu.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code>, contexto estratégico, ativo digital, valor composto.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Quando usar cada tipo</span><span class="text-neutral-500 text-sm ml-2">— O critério de decisão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pergunta-teste: <em class="text-neutral-300">"Essa tarefa muda de resultado dependendo do meu negócio específico?"</em> Se sim → super skill. Se não → utility skill. É assim que Lucas, Pedro e outros alunos classificam seus inventários no módulo prático.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Usar a ferramenta errada para o problema errado é o maior desperdício do curso. A pergunta-teste elimina a dúvida em menos de 30 segundos para qualquer tarefa.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">pergunta-teste de classificação, complexidade da tarefa, dependência de contexto, frequência de uso, valor estratégico.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🛠️</span>
+            <div><span class="font-medium">Exemplos de Utility Skills</span><span class="text-neutral-500 text-sm ml-2">— Biblioteca de ferramentas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Exemplos reais do curso: <code class="bg-dark-600 px-1 rounded text-emerald-300">encurtar-url.md</code> via Bitly API, <code class="bg-dark-600 px-1 rounded text-emerald-300">formatar-markdown.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">gerar-alt-text.md</code> para imagens, <code class="bg-dark-600 px-1 rounded text-emerald-300">converter-csv.md</code>. Todos reutilizáveis em qualquer projeto.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver exemplos reais calibra o que é uma tarefa adequada para utility skill. No módulo, você ganha uma biblioteca com <strong class="text-neutral-200">8 utility skills prontas</strong> para uso imediato.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">encurtar-url.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">formatar-markdown.md</code>, Bitly API, automações simples, biblioteca de skills.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🚀</span>
+            <div><span class="font-medium">Exemplos de Super Skills</span><span class="text-neutral-500 text-sm ml-2">— Sistemas de alto valor</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Os 6 sistemas construídos no curso: <code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">content-strategy.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">performance-analyzer.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">sponsor-response.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">trend-spotter.md</code> e <code class="bg-dark-600 px-1 rounded text-emerald-300">daily-brief.md</code>.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver os 6 sistemas concretos transforma conceito abstrato em objetivo tangível. Carla Mendes triplicou sua produção de conteúdo usando exatamente esses 6 arquivos — sem aumentar horas de trabalho.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">signal-dashboard.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">daily-brief.md</code>, <code class="bg-dark-600 px-1 rounded text-emerald-300">memory-os.md</code>, portfólio de skills, automação estratégica.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🗺️</span>
+            <div><span class="font-medium">Mapeando suas necessidades</span><span class="text-neutral-500 text-sm ml-2">— O inventário estratégico</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-emerald-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um exercício prático onde você lista todas as tarefas repetitivas do seu negócio em <code class="bg-dark-600 px-1 rounded text-emerald-300">inventario-skills.md</code> e aplica a pergunta-teste para classificar cada uma. Pedro completou esse exercício em 45 minutos e identificou 11 candidatas à super skill.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O inventário é o ponto de partida do seu portfólio. Sem ele, você constrói skills ao acaso. Com ele, você prioriza as <strong class="text-neutral-200">3 de maior impacto</strong> e começa com as que vão gerar resultado imediato.</p></div>
+              <div><span class="text-emerald-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="bg-dark-600 px-1 rounded text-emerald-300">inventario-skills.md</code>, mapeamento de processos, priorização por impacto, roadmap de skills, portfólio pessoal.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-1-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-1-3.html" class="px-4 py-2 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg transition-colors">Ver Completo →</a>
+      </div>
+    </div>
+
+    <!-- Navegação Final -->
+    <div class="flex justify-between mt-12">
+      <a href="../../index.html" class="px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar ao Início</a>
+      <a href="../trilha2/index.html" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Trilha 2: Os 4 Pilares →</a>
+    </div>
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-1-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <span class="text-emerald-400 font-bold">1.1</span>
+          <span class="font-semibold">O Problema das Skills Comuns</span>
+        </div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-1-1.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <span class="text-emerald-400 font-bold">1.2</span>
+          <span class="font-semibold">A Base Karpathy — 4 Princípios</span>
+        </div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-1-2.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <div id="modal-1-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <span class="text-emerald-400 font-bold">1.3</span>
+          <span class="font-semibold">Utility Skills vs Super Skills</span>
+        </div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-1-3.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Super Skills 🧠 — Trilha 1: Fundamentos | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+    }
+    function closeModal() {
+      document.querySelectorAll('.modal').forEach(modal => modal.classList.add('hidden'));
+      document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

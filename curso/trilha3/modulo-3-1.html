@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.1 Signal Dashboard na Prática | Super Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🧠</span>
+            <span class="font-bold text-lg hidden sm:inline">Super Skills</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">4 Pilares</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Na Prática</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Trilha 3</a>
+      <span>/</span>
+      <span class="text-purple-400">Módulo 3.1</span>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.1</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">📡 Signal Dashboard na Prática</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Como construir um radar estratégico que transforma dados dispersos do mercado em decisões de conteúdo e negócio fundamentadas em evidências reais.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">6</div>
+          <div class="text-xs text-neutral-400">Tópicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">35</div>
+          <div class="text-xs text-neutral-400">Minutos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Avançado</div>
+          <div class="text-xs text-neutral-400">Nível</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-purple-400">Prático</div>
+          <div class="text-xs text-neutral-400">Tipo</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Tópico 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">📡 O que é um Signal Dashboard</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Um <strong class="text-purple-400">Signal Dashboard</strong> é uma super skill que coleta, filtra e organiza automaticamente os dados relevantes para suas decisões estratégicas. Em vez de navegar por dezenas de fontes diariamente, você invoca uma skill que entrega apenas os sinais que importam — em menos de 15 minutos.
+      </p>
+
+      <!-- Cenário real -->
+      <div class="bg-dark-700/50 rounded-xl border border-dark-600 p-6 mb-6">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-lg">👤</div>
+          <div>
+            <div class="font-semibold text-white">Carla Mendes</div>
+            <div class="text-xs text-neutral-400">Estrategista de conteúdo, 200k seguidores</div>
+          </div>
+        </div>
+        <p class="text-neutral-300 text-sm italic">"Antes do Signal Dashboard, eu ficava lendo newsletters por 2 horas de manhã sem saber o que era sinal e o que era ruído. Agora o dashboard filtra tudo e me entrega 3 sinais relevantes por dia em menos de 15 minutos. Nas últimas 4 semanas meu volume de conteúdo aumentou 60% porque paro de procurar pauta e começo a produzir."</p>
+      </div>
+
+      <!-- Diagrama de arquitetura -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Arquitetura do Signal Dashboard</h4>
+        <div class="flex flex-col sm:flex-row items-center gap-3 flex-wrap">
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center min-w-24">
+            <div class="text-lg mb-1">🌐</div>
+            Fontes<br><span class="text-xs text-neutral-500 font-normal">RSS, APIs, Web</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center min-w-24">
+            <div class="text-lg mb-1">🔎</div>
+            Coleta<br><span class="text-xs text-neutral-500 font-normal">Firecrawl / MCP</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center min-w-24">
+            <div class="text-lg mb-1">⚗️</div>
+            Filtro<br><span class="text-xs text-neutral-500 font-normal">Critérios da skill</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center min-w-24">
+            <div class="text-lg mb-1">🧠</div>
+            Análise<br><span class="text-xs text-neutral-500 font-normal">Claude / IA</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center min-w-24">
+            <div class="text-lg mb-1">📋</div>
+            Output<br><span class="text-xs text-neutral-500 font-normal">Brief + Pautas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill file completo -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Super Skill</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Signal Dashboard — Super Skill v2.1
+# Criada por: Carla Mendes | Atualizada: 2025-04-01
+
+## IDENTIDADE E CONTEXTO ESTRATÉGICO
+
+Você é o Signal Dashboard da Carla Mendes, estrategista de conteúdo
+especializada em IA aplicada para criadores. Canal no YouTube com 200k
+inscritos, newsletter com 18k assinantes, foco em audiência de criadores
+e profissionais que querem usar IA no trabalho.
+
+**Objetivo do canal:** posicionar Carla como a maior referência brasileira
+em "IA prática para criadores" até o final de 2025.
+
+**Nicho monitorado:** IA generativa, ferramentas de criação, produtividade
+para criadores de conteúdo, automação sem código.
+
+**Audiência-alvo:** criadores entre 10k-500k seguidores, profissionais de
+marketing digital, designers e produtores de conteúdo 25-40 anos.
+
+---
+
+## INSTRUÇÕES DE EXECUÇÃO
+
+Quando invocado, execute as etapas nesta ordem:
+
+### ETAPA 1 — COLETA DE SINAIS (use WebSearch e Firecrawl)
+
+Busque atualizações das últimas 48 horas nas seguintes fontes:
+
+**Categoria IA:**
+- blog.anthropic.com — novos modelos, features, posts técnicos
+- openai.com/blog — lançamentos, atualizações de API
+- deepmind.google/discover/blog — pesquisas e papers relevantes
+- huggingface.co/blog — modelos open-source em destaque
+
+**Categoria Startups / Produto:**
+- ycombinator.com/blog — posts de founders sobre tendências
+- techcrunch.com — buscar "AI tools creators" e "generative AI"
+- producthunt.com — produtos com +200 votos nos últimos 7 dias
+
+**Categoria Dados / Tendências:**
+- trends.google.com — termos relacionados ao nicho nas últimas 2 semanas
+- explodingtopics.com — tendências emergentes em "AI" e "content creation"
+
+**Categoria Comunidades:**
+- reddit.com/r/LocalLLaMA — posts com +100 upvotes (últimas 48h)
+- reddit.com/r/MachineLearning — posts trending
+- twitter.com — pesquisar listas "AI creators" (últimas 24h)
+
+**Categoria Newsletters (via Firecrawl):**
+- therundown.ai — edição mais recente
+- bensbites.com — edição mais recente
+- tldr.tech/ai — edição mais recente
+
+### ETAPA 2 — FILTRO ESTRATÉGICO
+
+Para cada item coletado, avalie em 3 critérios (1-10):
+
+- RELEVÂNCIA: O item tem conexão direta com o nicho IA+Criadores?
+- NOVIDADE: É tendência emergente (&lt;7 dias) ou consolidada (&gt;30 dias)?
+- ACIONABILIDADE: Pode gerar pauta ou decisão nos próximos 7-30 dias?
+
+**Regra de corte:** Soma &lt; 22 → descartar. Soma ≥ 22 → incluir.
+**Classificação:** Soma 22-25 → Sinal Relevante. Soma 26-30 → Sinal Crítico.
+
+### ETAPA 3 — ANÁLISE DE SENTIMENTO
+
+Para cada sinal aprovado no filtro:
+- Determine sentimento geral: % positivo / % neutro / % negativo/cético
+- Avalie momentum: crescendo / estável / declinando
+- Calcule janela de oportunidade: número de dias antes de saturação
+- Identifique gap de conteúdo: ângulos ainda não cobertos pelo mercado
+
+### ETAPA 4 — GERAÇÃO DE PAUTAS
+
+Para cada Sinal Crítico, gere 3 ideias de pauta. Para cada pauta:
+- Título principal com gancho de curiosidade ou urgência
+- Ângulo específico (o que torna único vs. conteúdo existente)
+- Formato recomendado: vídeo longo / shorts / thread / newsletter
+- Audiência: iniciante / intermediário / avançado
+- Janela ideal de publicação: "publicar em X dias"
+- Score de esforço vs. potencial: 1-10 em cada
+
+### ETAPA 5 — BRIEF ESTRATÉGICO SEMANAL
+
+Se for segunda-feira (ou se solicitado), gere um brief com:
+- Top 3 sinais críticos da semana com análise completa
+- 3 pautas prioritárias com justificativa de dados
+- 1 tema para EVITAR (saturação detectada)
+- 1 recomendação estratégica de negócio (não apenas conteúdo)
+- Janela de oportunidade de 48h (se existir)
+
+---
+
+## FORMATO DE OUTPUT PADRÃO
+
+### SIGNAL DASHBOARD — [DATA]
+**Período analisado:** [últimas 48h / últimos 7 dias]
+**Fontes verificadas:** [número]
+**Sinais coletados:** [número] | **Aprovados no filtro:** [número]
+
+---
+
+#### 🔴 SINAIS CRÍTICOS (score 26-30)
+[Lista com análise completa]
+
+#### 🟡 SINAIS RELEVANTES (score 22-25)
+[Lista com análise resumida]
+
+#### 📋 PAUTAS GERADAS
+[Lista de ideias com todos os campos]
+
+#### ⚠️ TEMAS A EVITAR ESTA SEMANA
+[Lista com justificativa]
+
+---
+
+## ARQUIVOS DE CONTEXTO (ler antes de executar)
+
+- ~/skills/context/strategic-profile.md — perfil estratégico completo
+- ~/skills/context/current-state.md — objetivos e prioridades da semana
+- ~/skills/memory/signal-log.md — histórico de sinais das últimas 4 semanas
+- ~/skills/memory/decisions.md — decisões tomadas com base no dashboard
+
+## RESTRIÇÕES
+
+- Não incluir sinais sobre temas internacionais sem conexão com BR
+- Não repetir sinais já reportados nas últimas 2 semanas (verificar log)
+- Priorizar ângulos de "como fazer" sobre "o que é" — audiência é intermediária
+- Janela de oportunidade nunca pode ser "indefinida" — sempre estimar</code></pre>
+      </div>
+
+      <!-- Exemplo de output do dashboard -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">output-dashboard-exemplo.md</span>
+          <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Output Real</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### SIGNAL DASHBOARD — 29/04/2025
+**Período analisado:** últimas 48 horas
+**Fontes verificadas:** 14
+**Sinais coletados:** 23 | **Aprovados no filtro:** 4
+
+---
+
+#### 🔴 SINAIS CRÍTICOS
+
+**[1] Claude 3.7 com "extended thinking" — Anthropic Blog, 28/04**
+Novo modelo com raciocínio visível etapa a etapa. +4.200 menções no Twitter
+nas últimas 24h. Sentimento: 68% positivo, 22% neutro, 10% cético.
+Momentum: crescendo forte. Gap detectado: zero conteúdo prático em português
+mostrando use cases para criadores. Janela: 72 horas.
+Score: R=9 N=10 A=9 → TOTAL 28
+
+**[2] Sora 2.0 beta aberto para criadores — OpenAI Blog, 27/04**
+Geração de vídeo até 2 minutos com coerência temporal. Fila de espera de
+48h para acesso. Sentimento: 74% positivo, 15% neutro, 11% cético/preocupado.
+Momentum: explodindo. Gap: conteúdo sobre "limitações reais vs. hype".
+Janela: 5 dias antes de saturação.
+Score: R=9 N=9 A=9 → TOTAL 27
+
+---
+
+#### 🟡 SINAIS RELEVANTES
+
+**[3] Exploding Topics: "AI video editor" +340% em buscas (30 dias)**
+Ferramenta Runway, CapCut AI e Descript dominando. Tendência consolidando.
+Score: R=8 N=7 A=8 → TOTAL 23
+
+**[4] r/LocalLLaMA: Llama 4 Scout rodando em M3 MacBook (347 upvotes)**
+Modelo open-source de 109B destilado para rodar local. Comunidade técnica
+animada. Sentimento 81% positivo. Score: R=7 N=8 A=7 → TOTAL 22
+
+---
+
+#### 📋 PAUTAS GERADAS
+
+**PAUTA #1 — Sinal [1] Claude extended thinking**
+Título: "Eu deixei o Claude pensar por 3 minutos — o que apareceu me surpreendeu"
+Ângulo: mostrar o processo de raciocínio visível do Claude resolvendo um
+problema real de estratégia de conteúdo (não hipotético)
+Formato: vídeo longo (12-15min) + thread resumo
+Audiência: intermediário (já usa IA, quer ir além do básico)
+Publicar em: até 48 horas (janela crítica)
+Esforço: 6/10 | Potencial: 9/10
+
+**PAUTA #2 — Sinal [2] Sora 2.0**
+Título: "Testei o Sora 2.0 por 3 dias — 5 coisas que ninguém está contando"
+Ângulo: limitações honestas + casos de uso reais para criadores (não demos perfeitos)
+Formato: vídeo longo (18-20min)
+Audiência: todos os níveis
+Publicar em: até 5 dias
+Esforço: 7/10 | Potencial: 10/10
+
+**PAUTA #3 — Sinal [3] AI video editors**
+Título: "Comparei os 3 editores de vídeo com IA mais usados — resultado inesperado"
+Ângulo: teste prático com o mesmo clipe nos 3 editores, métricas objetivas
+Formato: vídeo médio (8-10min) + comparativo em texto para newsletter
+Audiência: iniciante/intermediário
+Publicar em: até 10 dias (tendência crescendo, não urgente)
+Esforço: 8/10 | Potencial: 8/10
+
+---
+
+#### ⚠️ TEMAS A EVITAR ESTA SEMANA
+- "AGI vai chegar em X anos" — supersaturado, 847 vídeos nos últimos 7 dias
+- Tutoriais básicos de ChatGPT — mercado saturado, CPC de anúncios caindo
+
+---
+
+**Recomendação estratégica:** Priorize a pauta #1 nas próximas 24h.
+A janela do extended thinking é pequena mas o gap em português é enorme —
+quem publicar primeiro captura o tráfego de busca de longo prazo.</code></pre>
+      </div>
+
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3 flex items-center"><span class="mr-2">💡</span> Dica Prática</h3>
+        <p class="text-neutral-300">Comece com um dashboard mínimo de 3 fontes que você já usa manualmente. O objetivo inicial é automatizar o que você já faz, não descobrir novas fontes. O skill file acima tem 50+ linhas — mas a sua v1.0 pode ter 15 linhas e escalar daqui.</p>
+      </div>
+    </section>
+
+    <!-- Tópico 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">🌐 Fontes de sinal — Onde monitorar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Não existe fonte universal de sinais. A escolha deve ser guiada pelo <strong class="text-purple-400">tipo de decisão que você quer apoiar</strong>. Abaixo estão as fontes organizadas por categoria para um criador de conteúdo no nicho de IA — com exemplos concretos de como instruir o Claude a acessá-las.
+      </p>
+
+      <!-- Grid de fontes por categoria -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">🤖</span> IA e Modelos</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Anthropic Blog — modelos e pesquisa</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>OpenAI Updates — GPT, DALL-E, Sora</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>DeepMind Research — papers e Gemini</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Hugging Face Blog — modelos open-source</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>ArXiv cs.AI — papers antes do mainstream</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">🚀</span> Startups e Produto</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Y Combinator Blog — tendências de startups</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>TechCrunch — lançamentos e financiamentos</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Product Hunt — +200 votos em 24h</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Indie Hackers — cases de criadores/solopreneurs</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>a16z Blog — macro tendências de mercado</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">📊</span> Dados e Tendências</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Exploding Topics — tendências emergentes</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Google Trends — volume de busca temporal</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Statista — dados de adoção e mercado</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>SimilarWeb — tráfego de concorrentes</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>SparkToro — onde a audiência está</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h4 class="font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">👥</span> Comunidades</h4>
+          <ul class="space-y-2 text-sm text-neutral-300">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>r/LocalLLaMA — modelos open-source</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>r/MachineLearning — pesquisa aplicada</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Discord servidores — Midjourney, Runway</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>Twitter/X listas de AI researchers</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>LinkedIn posts de fundadores</li>
+          </ul>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 md:col-span-2 p-5">
+          <h4 class="font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">📬</span> Newsletters (sinal curado e denso)</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <div class="font-semibold text-purple-400 text-sm mb-1">The Rundown AI</div>
+              <div class="text-xs text-neutral-400">Diária. Cobertura ampla de lançamentos. Alta densidade de sinal.</div>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <div class="font-semibold text-purple-400 text-sm mb-1">Ben's Bites</div>
+              <div class="text-xs text-neutral-400">Diária. Produtos e use cases práticos. Foco em produtividade.</div>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <div class="font-semibold text-purple-400 text-sm mb-1">TLDR AI</div>
+              <div class="text-xs text-neutral-400">Diária. Resumo técnico e de negócio. Ideal para filtrar ruído.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Snippet do skill file para fontes -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md — bloco de coleta</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Trecho do Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### ETAPA 1 — COLETA DE SINAIS
+
+Use WebSearch para buscar: "[fonte] site:[domínio] últimas 48 horas"
+Use Firecrawl para extrair conteúdo completo quando WebSearch retornar URL.
+
+Para newsletters, acesse diretamente via Firecrawl:
+  firecrawl.scrape("https://therundown.ai/p/latest")
+  firecrawl.scrape("https://bensbites.com/p/latest")
+  firecrawl.scrape("https://tldr.tech/ai/latest")
+
+Para Reddit, buscar via WebSearch:
+  "site:reddit.com/r/LocalLLaMA after:2025-04-27 score:100"
+
+Para Google Trends, buscar via WebSearch:
+  "google trends AI video editor 2025 crescimento"
+  (Firecrawl não acessa Trends diretamente — usar WebSearch para dados)
+
+Colete no mínimo 15 itens antes de aplicar o filtro.
+Registre source, título, data e URL de cada item em uma lista.</code></pre>
+      </div>
+    </section>
+
+    <!-- Tópico 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">🔍 Separando sinal de ruído — O filtro estratégico</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O problema não é falta de dados — é excesso de ruído. Um criador típico é exposto a centenas de informações por dia, mas <strong class="text-purple-400">menos de 5% têm relevância estratégica real</strong>. Veja na prática como o dashboard separa os dois.
+      </p>
+
+      <!-- Comparação antes/depois lado a lado -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-red-500/30 p-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-red-400"></span>
+            <h4 class="font-bold text-red-400 text-sm uppercase tracking-wide">Feed bruto — 20 itens misturados</h4>
+          </div>
+          <ul class="space-y-2 text-xs text-neutral-400">
+            <li class="flex gap-2"><span class="text-neutral-600">1.</span> Meta anuncia novo escritório em Austin</li>
+            <li class="flex gap-2"><span class="text-neutral-600">2.</span> GPT-5 lançado com context window de 1M tokens</li>
+            <li class="flex gap-2"><span class="text-neutral-600">3.</span> Apple atualiza emoji no iOS 18.4</li>
+            <li class="flex gap-2"><span class="text-neutral-600">4.</span> Runway ML lança geração de vídeo em 4K</li>
+            <li class="flex gap-2"><span class="text-neutral-600">5.</span> Elon Musk posta sobre Tesla</li>
+            <li class="flex gap-2"><span class="text-neutral-600">6.</span> r/LocalLLaMA: Llama 4 rodando em MacBook M3</li>
+            <li class="flex gap-2"><span class="text-neutral-600">7.</span> Novo filme da Marvel no cinema</li>
+            <li class="flex gap-2"><span class="text-neutral-600">8.</span> Exploding Topics: "AI video editor" +340%</li>
+            <li class="flex gap-2"><span class="text-neutral-600">9.</span> Preço do dólar sobe 0.3%</li>
+            <li class="flex gap-2"><span class="text-neutral-600">10.</span> Notícia: IA vai "acabar com empregos" (artigo de 2022 reciclado)</li>
+            <li class="flex gap-2 opacity-40"><span>11-20.</span> ... mais 10 itens similares</li>
+          </ul>
+          <div class="mt-4 pt-3 border-t border-dark-600 text-xs text-neutral-500">
+            Tempo para processar manualmente: ~90 minutos
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-green-500/30 p-5">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-green-400"></span>
+            <h4 class="font-bold text-green-400 text-sm uppercase tracking-wide">Output filtrado — 3 sinais classificados</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+              <div class="text-xs text-red-400 font-bold mb-1">🔴 CRÍTICO — Score 29</div>
+              <div class="text-sm text-neutral-300 font-medium">GPT-5: context 1M tokens</div>
+              <div class="text-xs text-neutral-500">Janela: 48h | Gap: tutoriais práticos para criadores em PT</div>
+            </div>
+            <div class="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
+              <div class="text-xs text-orange-400 font-bold mb-1">🟠 CRÍTICO — Score 27</div>
+              <div class="text-sm text-neutral-300 font-medium">Runway 4K — novo benchmark de vídeo IA</div>
+              <div class="text-xs text-neutral-500">Janela: 5 dias | Gap: comparativo prático com Sora</div>
+            </div>
+            <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
+              <div class="text-xs text-yellow-400 font-bold mb-1">🟡 RELEVANTE — Score 23</div>
+              <div class="text-sm text-neutral-300 font-medium">AI video editor: +340% buscas</div>
+              <div class="text-xs text-neutral-500">Janela: 10 dias | Gap: guia comparativo prático</div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-dark-600 text-xs text-neutral-500">
+            Tempo com o dashboard: ~12 minutos
+          </div>
+        </div>
+      </div>
+
+      <!-- Classificação item a item -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wide">Como o dashboard classifica cada item — exemplo real</h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-xs text-neutral-500 border-b border-dark-600">
+                <th class="text-left py-2 pr-4 font-medium">Item</th>
+                <th class="text-center py-2 px-2 font-medium">Relev.</th>
+                <th class="text-center py-2 px-2 font-medium">Novel.</th>
+                <th class="text-center py-2 px-2 font-medium">Ação</th>
+                <th class="text-center py-2 px-2 font-medium">Total</th>
+                <th class="text-left py-2 pl-4 font-medium">Decisão</th>
+              </tr>
+            </thead>
+            <tbody class="space-y-1">
+              <tr class="border-b border-dark-700/50">
+                <td class="py-2 pr-4 text-neutral-300">GPT-5 lançado — 1M tokens</td>
+                <td class="text-center py-2 px-2 text-purple-400">10</td>
+                <td class="text-center py-2 px-2 text-purple-400">10</td>
+                <td class="text-center py-2 px-2 text-purple-400">9</td>
+                <td class="text-center py-2 px-2 text-green-400 font-bold">29</td>
+                <td class="py-2 pl-4 text-green-400 text-xs">✓ CRÍTICO</td>
+              </tr>
+              <tr class="border-b border-dark-700/50">
+                <td class="py-2 pr-4 text-neutral-300">Runway lança geração 4K</td>
+                <td class="text-center py-2 px-2 text-purple-400">9</td>
+                <td class="text-center py-2 px-2 text-purple-400">9</td>
+                <td class="text-center py-2 px-2 text-purple-400">9</td>
+                <td class="text-center py-2 px-2 text-green-400 font-bold">27</td>
+                <td class="py-2 pl-4 text-green-400 text-xs">✓ CRÍTICO</td>
+              </tr>
+              <tr class="border-b border-dark-700/50">
+                <td class="py-2 pr-4 text-neutral-300">AI video editor +340%</td>
+                <td class="text-center py-2 px-2 text-purple-400">8</td>
+                <td class="text-center py-2 px-2 text-purple-400">7</td>
+                <td class="text-center py-2 px-2 text-purple-400">8</td>
+                <td class="text-center py-2 px-2 text-yellow-400 font-bold">23</td>
+                <td class="py-2 pl-4 text-yellow-400 text-xs">✓ RELEVANTE</td>
+              </tr>
+              <tr class="border-b border-dark-700/50">
+                <td class="py-2 pr-4 text-neutral-300">Elon Musk posta sobre Tesla</td>
+                <td class="text-center py-2 px-2 text-neutral-500">2</td>
+                <td class="text-center py-2 px-2 text-neutral-500">5</td>
+                <td class="text-center py-2 px-2 text-neutral-500">1</td>
+                <td class="text-center py-2 px-2 text-red-400 font-bold">8</td>
+                <td class="py-2 pl-4 text-red-400 text-xs">✗ DESCARTE</td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-neutral-300">IA vai "acabar com empregos" (reciclado)</td>
+                <td class="text-center py-2 px-2 text-neutral-500">6</td>
+                <td class="text-center py-2 px-2 text-neutral-500">1</td>
+                <td class="text-center py-2 px-2 text-neutral-500">3</td>
+                <td class="text-center py-2 px-2 text-red-400 font-bold">10</td>
+                <td class="py-2 pl-4 text-red-400 text-xs">✗ DESCARTE</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Critérios no skill file -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md — bloco de filtro</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Trecho do Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### ETAPA 2 — FILTRO ESTRATÉGICO
+
+Para cada item coletado, avalie em 3 critérios (1-10):
+
+**RELEVÂNCIA (1-10):**
+- 9-10: Impacto direto no nicho IA+Criadores
+- 7-8: Relacionado ao nicho com conexão indireta
+- 5-6: Tangencial — pode virar pauta mas força conexão
+- 1-4: Sem conexão com nicho → descartar automaticamente
+
+**NOVIDADE (1-10):**
+- 9-10: Surgiu nas últimas 24h, zero conteúdo em PT ainda
+- 7-8: Surgiu nos últimos 3 dias, pouco conteúdo em PT
+- 5-6: Surgiu nos últimos 7 dias, algum conteúdo existe
+- 1-4: Tendência consolidada (&gt;30 dias) ou reciclagem de conteúdo antigo
+
+**ACIONABILIDADE (1-10):**
+- 9-10: Leva a pauta de conteúdo OU decisão estratégica nos próximos 7 dias
+- 7-8: Gera pauta ou decisão nos próximos 30 dias
+- 5-6: Útil para contexto mas sem ação imediata clara
+- 1-4: Informação sem caminho de ação → descartar
+
+**Regra de corte:**
+  Soma &lt; 22 → DESCARTAR (ruído)
+  Soma 22-25 → RELEVANTE (incluir com análise resumida)
+  Soma 26-30 → CRÍTICO (incluir com análise completa + pautas)</code></pre>
+      </div>
+    </section>
+
+    <!-- Tópico 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📊 Análise de sentimento e tendências</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        Coletar dados é a parte fácil. A vantagem real está em <strong class="text-purple-400">extrair o contexto além do conteúdo</strong>: o sentimento da audiência, a trajetória de uma tendência e o ponto exato do ciclo de adoção em que um tema se encontra.
+      </p>
+
+      <!-- Exemplo de output de análise de sentimento -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">análise-sentimento-gpt5.md</span>
+          <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Output Real</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## ANÁLISE DE SENTIMENTO — GPT-5 lançamento (28/04/2025)
+
+**Fontes analisadas:** 847 posts no Twitter/X, 234 comentários Reddit,
+                       18 posts de newsletters especializadas
+
+**SENTIMENTO GERAL:**
+  Positivo: 60% — "finalmente context 1M", "game changer para devs"
+  Neutro:   25% — "vou testar antes de opinar", aguardando benchmarks
+  Cético:   15% — "marketing > realidade", preocupações com custo de API
+
+**MOMENTUM:** Crescendo. Volume de menções dobrou em 18h.
+  Pico esperado: 36-48h a partir do lançamento.
+
+**TIMING RECOMENDADO:** Entrar AGORA (janela de 48h).
+  Risco de esperar: supersaturação em 72h com conteúdo genérico.
+
+**GAP DETECTADO:**
+  - 94% do conteúdo em inglês — oportunidade enorme em PT-BR
+  - Conteúdo existente: foco em benchmarks técnicos
+  - Gap real: use cases práticos para criadores de conteúdo
+  - Pergunta não respondida: "Como usar 1M de tokens no dia a dia?"
+
+**POSICIONAMENTO RECOMENDADO:**
+  Não fazer mais um "GPT-5 é incrível" — isso já tem centenas.
+  Fazer: "Eu dei ao GPT-5 todo o histórico do meu canal (500 vídeos)
+  e pedi para ele criar minha estratégia de conteúdo para os próximos
+  3 meses — aqui está o que aconteceu."
+  Isso usa o 1M context como demonstração prática, não como feature.</code></pre>
+      </div>
+
+      <!-- Gráfico visual em HTML/CSS — curva de adoção -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-6">Curva de Adoção — GPT-5 (simulação de 14 dias)</h4>
+        <div class="relative">
+          <!-- Eixo Y -->
+          <div class="absolute left-0 top-0 bottom-8 flex flex-col justify-between text-xs text-neutral-600 pr-2 w-8">
+            <span>alto</span>
+            <span>med</span>
+            <span>baixo</span>
+          </div>
+          <!-- Barras -->
+          <div class="ml-10 flex items-end gap-1 h-32 border-b border-l border-dark-600">
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/30 rounded-t-sm" style="height:10%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D1</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/50 rounded-t-sm" style="height:25%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D2</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/70 rounded-t-sm" style="height:55%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D3</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500 rounded-t-sm" style="height:90%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D4</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500 rounded-t-sm" style="height:100%"></div>
+              <span class="text-xs text-purple-400 mt-1 font-bold">D5</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/80 rounded-t-sm" style="height:95%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D6</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/60 rounded-t-sm" style="height:80%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D7</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/40 rounded-t-sm" style="height:65%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D8</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/30 rounded-t-sm" style="height:50%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D9</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/20 rounded-t-sm" style="height:40%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D10</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/15 rounded-t-sm" style="height:32%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D11</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/10 rounded-t-sm" style="height:25%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D12</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/10 rounded-t-sm" style="height:20%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D13</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-1">
+              <div class="w-full bg-purple-500/10 rounded-t-sm" style="height:18%"></div>
+              <span class="text-xs text-neutral-600 mt-1">D14</span>
+            </div>
+          </div>
+          <!-- Indicadores -->
+          <div class="ml-10 mt-4 flex gap-4 text-xs">
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400"></span><span class="text-neutral-400">Janela ideal: D2-D4</span></div>
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span><span class="text-neutral-400">Pico de atenção: D5</span></div>
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400"></span><span class="text-neutral-400">Saturação: D6+</span></div>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-500 mt-4">Volume de menções e interesse de busca normalizado — baseado em padrão histórico de lançamentos de modelos LLM.</p>
+      </div>
+
+      <!-- Como o skill file instrui o Claude a analisar sentimento -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md — bloco de análise</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Trecho do Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### ETAPA 3 — ANÁLISE DE SENTIMENTO E TENDÊNCIAS
+
+Para cada sinal aprovado no filtro (score ≥ 22):
+
+**SENTIMENTO** — analise comentários/posts coletados e estime:
+  - % positivo: reações de entusiasmo, adoção, casos de uso
+  - % neutro: aguardando, indiferente, "vou ver"
+  - % negativo/cético: ceticismo, preocupações, críticas
+
+**MOMENTUM** — avalie a trajetória:
+  - Crescendo: volume de menções aumentando nas últimas 24-48h
+  - Estável: volume constante por 3-7 dias
+  - Declinando: volume caindo — janela fechando
+
+**CURVA DE ADOÇÃO** — identifique o estágio:
+  - Emergente: &lt;48h, &lt;1000 menções, conteúdo escasso
+  - Crescimento: 2-7 dias, crescimento exponencial de menções
+  - Pico: 5-10 dias, máximo de atenção, saturação chegando
+  - Declínio: &gt;10 dias, conteúdo abundante, atenção caindo
+
+**TIMING** — baseado no estágio:
+  - Emergente → PUBLICAR EM 24-48H (janela de pioneirismo)
+  - Crescimento → PUBLICAR EM 3-5 DIAS (onda de tráfego)
+  - Pico → só publicar com ângulo muito diferenciado
+  - Declínio → EVITAR (mercado saturado)
+
+**GAP DE CONTEÚDO** — identifique:
+  - Pergunta mais repetida que não tem boa resposta
+  - Ângulo não explorado pelos 10 primeiros resultados
+  - Nível de audiência sub-servido (iniciante vs. avançado)
+  - Formato ausente (ex: muito texto, pouco vídeo prático)</code></pre>
+      </div>
+    </section>
+
+    <!-- Tópico 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">💡 Gerando ideias de conteúdo — Do sinal à ação</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        A maior falha dos sistemas de monitoramento é parar na análise. O sinal só tem valor quando se transforma em <strong class="text-purple-400">pauta concreta, ângulo específico e formato adequado</strong>. Veja o pipeline completo: do sinal bruto às ideias prontas para produzir.
+      </p>
+
+      <!-- Exemplo completo: sinal → 5 ideias -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="font-bold text-white mb-2 text-sm uppercase tracking-wide">Pipeline completo — da detecção às ideias</h4>
+        <div class="flex flex-col sm:flex-row items-center gap-3 flex-wrap mb-6">
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center">
+            Sinal detectado<br><span class="text-xs font-normal text-neutral-500">GPT-5, score 29</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center">
+            Gap analisado<br><span class="text-xs font-normal text-neutral-500">zero conteúdo prático PT</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center">
+            Posicionamento<br><span class="text-xs font-normal text-neutral-500">criadores intermediários</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-purple-500/20 border border-purple-500/30 rounded-lg px-4 py-3 text-sm text-purple-400 font-medium text-center">
+            5 ideias geradas<br><span class="text-xs font-normal text-neutral-500">com ângulo e formato</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- As 5 ideias com todos os campos -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">pautas-geradas-gpt5.md</span>
+          <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Output Real</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## PAUTAS GERADAS — Sinal: GPT-5 com 1M context window
+
+**IDEIA #1 — PRIORIDADE MÁXIMA**
+Título: "Eu dei ao GPT-5 todo o histórico do meu canal e pedi minha estratégia"
+Ângulo: demonstração prática do 1M tokens — não benchmark, mas caso de uso real
+         de criador (dar 500 transcrições de vídeos e pedir análise estratégica)
+Formato: Vídeo longo YouTube (15-18 min) + thread X resumindo os 3 insights
+Audiência: Intermediária — criadores que já usam IA mas querem ir além do básico
+Janela: URGENTE — publicar em até 36 horas
+Esforço: 5/10 (executar o teste leva 2h, gravar é natural)
+Potencial: 10/10 (pioneirismo + use case único + ângulo prático)
+
+**IDEIA #2**
+Título: "1 milhão de tokens: o que isso significa na prática para você"
+Ângulo: traduzir o número técnico para casos reais — "= 750 livros", "= 10 anos
+         de emails", "= todo o script de todos os seus vídeos de 2024 e 2025"
+Formato: Newsletter (formato explicativo) + repost como thread
+Audiência: Todos os níveis — linguagem acessível
+Janela: 48-72 horas
+Esforço: 3/10 | Potencial: 8/10
+
+**IDEIA #3**
+Título: "Testei o GPT-5 em 5 tarefas de criador — o que mudou de verdade"
+Ângulo: comparativo honesto com GPT-4o nas mesmas 5 tarefas: roteiro, pesquisa,
+         edição de copy, análise de métricas, ideação de pauta
+Formato: Vídeo médio YouTube (10-12 min) com timestamps
+Audiência: Todos — especialmente quem ainda usa GPT-4o
+Janela: 3-5 dias
+Esforço: 7/10 | Potencial: 9/10
+
+**IDEIA #4**
+Título: "Por que eu não vou migrar para o GPT-5 ainda — e você?"
+Ângulo: contrarian — focar no custo (3x mais caro que GPT-4o) e quando
+         NÃO faz sentido migrar. Gera debate e posicionamento diferenciado.
+Formato: Thread X (alto potencial de engajamento/share) + vídeo curto
+Audiência: Avançada — quem usa API e pensa em custos
+Janela: 2-4 dias
+Esforço: 2/10 | Potencial: 8/10
+
+**IDEIA #5**
+Título: "O prompt que aproveita 100% do 1M de contexto do GPT-5"
+Ângulo: tutorial prático — como estruturar um prompt que realmente usa
+         o contexto longo sem desperdiçar tokens (com template pronto)
+Formato: Tutorial YouTube (8-10 min) + arquivo de template para download
+Audiência: Intermediária/Avançada — quem quer usar bem, não só testar
+Janela: 5-7 dias
+Esforço: 6/10 | Potencial: 8/10
+
+---
+RECOMENDAÇÃO: Executar ideias #1 e #4 em paralelo hoje.
+#1 captura o pico de atenção. #4 gera engajamento e diferenciação.</code></pre>
+      </div>
+
+      <!-- Como configurar o skill file para conectar sinal ao posicionamento -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md — bloco de geração de pautas</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Trecho do Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### ETAPA 4 — GERAÇÃO DE PAUTAS
+
+Para cada Sinal Crítico (score 26-30), gere exatamente 5 ideias de pauta.
+Para Sinais Relevantes (score 22-25), gere 2-3 ideias.
+
+**POSICIONAMENTO OBRIGATÓRIO** — leia antes de gerar:
+  - Carla é conhecida por conteúdo PRÁTICO, não teórico
+  - Audiência é intermediária — não iniciar do zero, não ser demasiado técnico
+  - Tom: direto, honest, sem hype exagerado — "vou te contar o que realmente aconteceu"
+  - Diferencial: ela testa na vida real antes de recomendar
+  - NÃO criar conteúdo "o que é X" — criar conteúdo "como usar X para Y"
+
+Para cada pauta, preencher TODOS os campos:
+  TÍTULO: com gancho de curiosidade, urgência ou resultado específico
+  ÂNGULO: o que torna este conteúdo único vs. os 10 primeiros resultados
+  FORMATO: vídeo longo / vídeo curto / thread / newsletter / comparativo
+  AUDIÊNCIA: iniciante / intermediário / avançado (escolher um)
+  JANELA: número exato de dias para publicar (nunca "indefinido")
+  ESFORÇO: 1-10 (1=30min, 10=semana inteira de produção)
+  POTENCIAL: 1-10 (considerando timing, gap e alinhamento com canal)</code></pre>
+      </div>
+    </section>
+
+    <!-- Tópico 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🎯 Decisões estratégicas apoiadas por dados</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">
+        O Signal Dashboard não é apenas uma ferramenta de pauta — é um <strong class="text-purple-400">sistema de inteligência estratégica</strong> que gera briefs semanais com recomendações concretas de negócio. Veja um brief real gerado pelo dashboard da Carla.
+      </p>
+
+      <!-- Brief estratégico real -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">weekly-brief-semana-18-2025.md</span>
+          <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded">Brief Real — Gerado pelo Dashboard</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## WEEKLY INTELLIGENCE BRIEF — Semana 18, 2025
+**Gerado em:** 28/04/2025 08:14 | **Fontes verificadas:** 14
+**Baseado em:** sinais coletados de 21/04 a 28/04/2025
+
+---
+
+### TOP 3 SINAIS CRÍTICOS DA SEMANA
+
+**SINAL #1 — Gemini 2.0 Flash dominando benchmarks de velocidade**
+  Score: 28 | Momentum: crescendo forte | Janela: 48h
+  Contexto: Google lançou Gemini 2.0 Flash com velocidade 4x superior ao
+  GPT-4o em tarefas de geração de texto. Posts no Twitter/X: 12.400 em 24h.
+  Sentimento: 71% positivo. Gap: ZERO tutoriais comparativos em PT-BR.
+
+**SINAL #2 — "IA para PMEs" com crescimento de 340% em buscas (Google Trends)**
+  Score: 27 | Momentum: crescendo | Janela: 15 dias
+  Contexto: Termo explodiu após reportagem da Folha sobre automação no varejo.
+  Oportunidade: Carla pode ser a ponte entre IA avançada e PMEs sem equipe técnica.
+  Gap: conteúdo sobre IA para PMEs em PT-BR é básico demais para a audiência real.
+
+**SINAL #3 — Claude 3.7 com Projects e memória persistente nativa**
+  Score: 26 | Momentum: estável | Janela: 7 dias
+  Contexto: Anthropic lançou Projects com memória cross-conversação. Criadores
+  começando a compartilhar workflows. Gap: tutoriais de setup para creators.
+
+---
+
+### RECOMENDAÇÕES ESTRATÉGICAS
+
+**(1) CRIAR AGORA — janela de 48h:**
+  Conteúdo sobre Gemini 2.0 Flash com comparativo prático vs. GPT-4o.
+  Formato: vídeo 10-12 min com teste em 5 tarefas reais de criador.
+  Justificativa: pioneirismo em PT-BR + sentimento positivo + janela pequena.
+
+**(2) EVITAR esta semana — supersaturação detectada:**
+  Tema "AGI vai chegar em X anos" — 847 vídeos publicados nos últimos 7 dias.
+  Tema "ChatGPT para iniciantes" — mercado completamente saturado, CPC caindo.
+
+**(3) EXPLORAR EM 15 DIAS — oportunidade crescendo:**
+  Ângulo "IA para PMEs" está em crescimento de 340% em buscas.
+  Estratégia: criar série de 3 vídeos com cases reais de pequenas empresas.
+  Diferenciar com entrevistas (não apenas tutoriais) para ganhar autoridade.
+
+**(4) DECISÃO DE POSICIONAMENTO:**
+  Com base nos sinais das últimas 4 semanas, recomendo REFORÇAR o ângulo
+  "IA prática para não-técnicos". A audiência técnica está sendo servida —
+  o gap real está em profissionais de marketing, design e conteúdo que querem
+  usar IA mas não têm background técnico. Carla preenche esse gap melhor que
+  qualquer outro criador BR com +100k no nicho.
+
+---
+**Próxima execução recomendada:** segunda-feira 05/05 às 08h00</code></pre>
+      </div>
+
+      <!-- Comparação: decisão sem vs. com dashboard -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-red-500/30 p-5">
+          <h4 class="font-bold text-red-400 mb-4 text-sm uppercase tracking-wide">Sem dashboard — decisão por intuição</h4>
+          <div class="space-y-3 text-sm text-neutral-300">
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">Segunda-feira, 08h30</p>
+              <p>"Acho que vou fazer um vídeo sobre IA hoje... mas sobre qual tema? Deixa eu dar uma olhada no Twitter..."</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">10h15 — 1h45 depois</p>
+              <p>"Ok li muita coisa, vi que o GPT-5 saiu, vi sobre Gemini, vi sobre IA para empresas... não sei qual é mais urgente."</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">Decisão final</p>
+              <p>"Vou fazer sobre GPT-5 mesmo, todo mundo está falando." (sem saber se a janela fechou, sem ângulo diferenciado)</p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-dark-600 text-xs text-neutral-500">
+            Tempo consumido: ~2h | Ângulo: genérico | Resultado: mais um na massa
+          </div>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-green-500/30 p-5">
+          <h4 class="font-bold text-green-400 mb-4 text-sm uppercase tracking-wide">Com dashboard — decisão baseada em dados</h4>
+          <div class="space-y-3 text-sm text-neutral-300">
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">Segunda-feira, 08h00</p>
+              <p>"Vou rodar o dashboard." <span class="text-purple-400">[invoca a skill]</span></p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">08h14 — 14 minutos depois</p>
+              <p>Brief gerado: Gemini 2.0 Flash — janela 48h, gap PT-BR confirmado, ângulo recomendado: comparativo prático.</p>
+            </div>
+            <div class="bg-dark-700/50 rounded-lg p-3">
+              <p class="text-neutral-400 text-xs mb-1">Decisão final</p>
+              <p>"Gravo o comparativo Gemini vs. GPT-4o hoje à tarde. Pauta, roteiro e timing definidos antes das 09h."</p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-dark-600 text-xs text-neutral-500">
+            Tempo consumido: ~14 min | Ângulo: único | Resultado: pioneirismo em PT-BR
+          </div>
+        </div>
+      </div>
+
+      <!-- Template de brief semanal gerado pelo skill -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">signal-dashboard.md — bloco de brief semanal</span>
+          <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Trecho do Skill File</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### ETAPA 5 — WEEKLY INTELLIGENCE BRIEF (executar toda segunda-feira)
+
+Gerar brief semanal com o seguinte formato:
+
+## WEEKLY INTELLIGENCE BRIEF — Semana [N], [ANO]
+**Gerado em:** [data e hora]
+**Fontes verificadas:** [N]
+**Baseado em:** [período de análise]
+
+---
+
+### TOP 3 SINAIS CRÍTICOS DA SEMANA
+[Para cada sinal: score, momentum, janela, contexto completo, gap]
+
+### RECOMENDAÇÕES ESTRATÉGICAS
+(1) CRIAR AGORA — janela de Xh: [tema + justificativa de dados]
+(2) EVITAR esta semana — [tema + motivo com dados]
+(3) EXPLORAR em X dias — [tema + oportunidade crescendo]
+(4) DECISÃO DE POSICIONAMENTO — [insight estratégico de negócio, não apenas pauta]
+
+---
+
+**Regra de ouro do brief:** cada recomendação DEVE ter dado de suporte.
+Não aceitar "parece que vai crescer" — apenas "crescimento de X% em Y dias".
+Não aceitar "muita gente está falando" — apenas "N posts nas últimas 24h".</code></pre>
+      </div>
+    </section>
+
+    <!-- Resumo -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo 3.1</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Skill file completo de 50+ linhas</strong><span class="text-neutral-400"> — veja o signal-dashboard.md acima como modelo: contexto estratégico, etapas de coleta, critérios de filtro e formato de output</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Fontes organizadas por categoria</strong><span class="text-neutral-400"> — IA, startups, dados, comunidades e newsletters com instruções de como o Claude as acessa via WebSearch e Firecrawl</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Filtro em 3 critérios com score</strong><span class="text-neutral-400"> — relevância + novidade + acionabilidade. Soma &lt;22 descarta, soma ≥26 é crítico. Elimina 80% do ruído automaticamente</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Análise de sentimento com números reais</strong><span class="text-neutral-400"> — % positivo/neutro/cético, momentum, timing de publicação e gap de conteúdo detectado automaticamente</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">5 pautas geradas por sinal crítico</strong><span class="text-neutral-400"> — com título, ângulo, formato, audiência, janela de publicação e score esforço/potencial</span></div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-purple-400 mt-1">✓</span>
+            <div><strong class="text-white">Weekly Intelligence Brief</strong><span class="text-neutral-400"> — top 3 sinais, recomendações com dados, tema para evitar e 1 decisão estratégica de negócio toda segunda-feira</span></div>
+          </div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próximo Módulo:</h3>
+          <p class="text-neutral-300">3.2 — Construindo Suas Super Skills: do mapeamento de processos ao roadmap completo de implementação</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha 3</a>
+          <a href="modulo-3-2.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Super Skills 🧠 — Módulo 3.1 | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    function updateIcons() {
+      if (html.classList.contains('dark')) {
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      } else {
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      html.classList.remove('dark');
+    }
+    updateIcons();
+
+    toggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      updateIcons();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2.4 Ciclo de Refinamento | Super Skills</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; } .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; } html:not(.dark) .bg-dark-900 { background-color: #ffffff; } html:not(.dark) .bg-dark-800 { background-color: #f9fafb; } html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; } html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; } html:not(.dark) .text-neutral-100 { color: #111827; } html:not(.dark) .text-neutral-300 { color: #4b5563; } html:not(.dark) .text-neutral-400 { color: #6b7280; } html:not(.dark) .text-neutral-500 { color: #9ca3af; } html:not(.dark) .border-dark-600 { border-color: #d1d5db; } html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; } html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); } html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); } html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; } html:not(.dark) .text-primary { color: #a16207; } html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); } html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); } html:not(.dark) .text-sky-400 { color: #0369a1; } html:not(.dark) .text-yellow-400 { color: #a16207; } html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; } html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; } html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300"><span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Super Skills</span></a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">4 Pilares</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Na Prática</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-blue-400">Início</a><span>/</span>
+      <a href="index.html" class="hover:text-blue-400">Trilha 2</a><span>/</span>
+      <span class="text-blue-400">Módulo 2.4</span>
+    </div>
+  </nav>
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">MÓDULO 2.4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔄 Pilar 4 — Ciclo de Refinamento</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">O loop de feedback de 6 passos que transforma skills estáticas em sistemas de valor crescente, com versionamento, métricas e automação progressiva do ciclo de melhoria.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">30</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Intermediário</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- TÓPICO 1 -->
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🔄 Por que skills precisam melhorar</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Uma skill criada hoje e usada sem atualização por 6 meses não aprendeu nada com seus feedbacks, não evoluiu com as mudanças do negócio. Skills estáticas são ativos de depreciação — diminuem de valor enquanto o contexto muda ao redor delas.</p>
+
+      <!-- Gráfico visual: skill estática vs com refinamento -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Valor ao longo do tempo: estática vs refinamento</h4>
+        <div class="relative h-48">
+          <!-- Eixo Y -->
+          <div class="absolute left-0 top-0 bottom-6 w-12 flex flex-col justify-between text-xs text-neutral-600 text-right pr-2">
+            <span>Alto</span>
+            <span>Médio</span>
+            <span>Baixo</span>
+          </div>
+          <!-- Área do gráfico -->
+          <div class="absolute left-12 right-0 top-0 bottom-6 border-l border-b border-dark-600">
+            <!-- Linha: skill estática (reta) -->
+            <svg class="absolute inset-0 w-full h-full overflow-visible">
+              <!-- Skill estática: linha reta horizontal no meio -->
+              <line x1="0" y1="60%" x2="100%" y2="60%" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3" opacity="0.7"/>
+              <!-- Skill com refinamento: curva crescente -->
+              <path d="M 0 60% Q 25% 55% 50% 40% T 100% 10%" fill="none" stroke="#3b82f6" stroke-width="2.5" opacity="0.9"/>
+              <!-- Labels nas linhas -->
+              <text x="5" y="57%" fill="#ef4444" font-size="10" opacity="0.8">Skill estática</text>
+              <text x="60%" y="15%" fill="#3b82f6" font-size="10" opacity="0.9">Com refinamento</text>
+            </svg>
+          </div>
+          <!-- Eixo X -->
+          <div class="absolute bottom-0 left-12 right-0 flex justify-between text-xs text-neutral-600 pb-0">
+            <span>Mês 1</span>
+            <span>Mês 3</span>
+            <span>Mês 6</span>
+            <span>Mês 12</span>
+          </div>
+        </div>
+        <div class="mt-2 grid grid-cols-4 gap-2 text-xs">
+          <div class="bg-dark-700 rounded p-2 text-center">
+            <div class="text-blue-400 font-semibold">Mês 1</div>
+            <div class="text-neutral-400">Valor base igual</div>
+          </div>
+          <div class="bg-dark-700 rounded p-2 text-center">
+            <div class="text-blue-400 font-semibold">Mês 3</div>
+            <div class="text-neutral-400">+40% com 5 iterações</div>
+          </div>
+          <div class="bg-dark-700 rounded p-2 text-center">
+            <div class="text-blue-400 font-semibold">Mês 6</div>
+            <div class="text-neutral-400">+140% edge cases cobertos</div>
+          </div>
+          <div class="bg-dark-700 rounded p-2 text-center">
+            <div class="text-blue-400 font-semibold">Mês 12</div>
+            <div class="text-neutral-400">3x diferencial competitivo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparação output v1.0 vs v1.5 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">Skill youtube-roteiro — Versão 1.0 (dia 1)</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap">HOOK:
+"Você sabia que a IA pode ajudar na
+sua produtividade?"
+
+DESENVOLVIMENTO:
+• IA é útil para automação
+• Existem várias ferramentas disponíveis
+• É importante aprender a usar
+
+CTA: "Se gostou, se inscreva no canal!"</pre>
+          <div class="mt-2 text-xs text-red-400">Taxa de aceitação original: 31%</div>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">Skill youtube-roteiro — Versão 1.5 (3 semanas)</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap">HOOK:
+"Você gasta 2 horas por dia em tarefas
+que o Claude poderia fazer em 8 minutos.
+Aqui está a prova."
+
+DESENVOLVIMENTO:
+[Caso real: Mariana, gerente de projetos,
+economizou 11h/semana automatizando
+relatórios com Claude Code — aqui como]
+
+CTA: "Testa isso hoje: abra o Claude e
+escreva: 'Automatize este relatório...'
+Leva 5 minutos. Link na descrição."</pre>
+          <div class="mt-2 text-xs text-blue-400">Taxa de aceitação após refinamento: 78%</div>
+        </div>
+      </div>
+
+      <!-- Analogia: ativo de valor crescente -->
+      <div class="bg-primary/10 rounded-xl border border-primary/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 A Analogia do Funcionário Experiente</h3>
+        <p class="text-neutral-300 text-sm">Um funcionário recém-contratado tem as mesmas habilidades técnicas do veterano de 5 anos — mas o veterano tem 5 anos de contexto, histórico de erros, padrões de sucesso e conhecimento específico do negócio. Sua skill de hoje é o funcionário recém-contratado. Com ciclo de refinamento, ela se torna o veterano. <strong class="text-primary">Essa diferença é incopiável por quem começa agora.</strong></p>
+      </div>
+    </section>
+
+    <!-- TÓPICO 2 -->
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📝 O loop de feedback (6 passos)</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O loop de feedback não é um processo vago de "melhorar a skill quando der". É um ciclo preciso de 6 passos que, executado regularmente, garante melhoria sistemática e mensurável ao longo do tempo.</p>
+
+      <!-- Diagrama circular dos 6 passos -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-5">Loop de Feedback — 6 Passos</h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">⚡</div>
+            <div class="text-blue-400 font-semibold text-sm mb-1">1. Geração</div>
+            <div class="text-xs text-neutral-400">Skill executa e produz output</div>
+          </div>
+          <div class="bg-dark-700 border border-dark-600 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">👁️</div>
+            <div class="text-neutral-300 font-semibold text-sm mb-1">2. Avaliação</div>
+            <div class="text-xs text-neutral-400">Você compara com o ideal</div>
+          </div>
+          <div class="bg-dark-700 border border-dark-600 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">💬</div>
+            <div class="text-neutral-300 font-semibold text-sm mb-1">3. Feedback</div>
+            <div class="text-xs text-neutral-400">Articula o problema com precisão</div>
+          </div>
+          <div class="bg-dark-700 border border-dark-600 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">🔍</div>
+            <div class="text-neutral-300 font-semibold text-sm mb-1">4. Revisão</div>
+            <div class="text-xs text-neutral-400">Claude analisa e propõe mudanças</div>
+          </div>
+          <div class="bg-dark-700 border border-dark-600 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">✏️</div>
+            <div class="text-neutral-300 font-semibold text-sm mb-1">5. Atualização</div>
+            <div class="text-xs text-neutral-400">Skill é modificada e versionada</div>
+          </div>
+          <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-4 text-center">
+            <div class="text-2xl mb-2">✅</div>
+            <div class="text-emerald-400 font-semibold text-sm mb-1">6. Verificação</div>
+            <div class="text-xs text-neutral-400">Testa para confirmar melhoria</div>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <div class="text-xs text-neutral-500">↩ Retorna ao passo 1 com a skill atualizada</div>
+        </div>
+      </div>
+
+      <!-- Exemplo completo de uma iteração real -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">Iteração real — skill youtube-roteiro — 14/Abril/2026</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Exemplo Completo</span>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-dark-800 rounded-lg p-3 border-l-4 border-blue-500">
+            <div class="text-xs text-blue-400 font-semibold mb-1">Passo 1-2: Output gerado e avaliado</div>
+            <p class="text-xs text-neutral-400">Skill gerou roteiro com 7 bullet points no desenvolvimento. Pedro avaliou e percebeu que o conteúdo ficou fragmentado demais — parecia uma lista, não uma história.</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-3 border-l-4 border-yellow-500">
+            <div class="text-xs text-yellow-400 font-semibold mb-1">Passo 3: Feedback estruturado dado por Pedro</div>
+            <p class="text-xs text-neutral-400">"O desenvolvimento usou 7 bullets mas eu prefiro prosa corrida. O problema é que bullet points fazem o roteiro parecer uma apresentação de slides, não uma conversa. Para minha audiência de 30-40 anos acostumada com vídeos do YouTube, o tom de conversa retém muito melhor. Regra geral: sem bullets no desenvolvimento — apenas prosa em parágrafos curtos de 2-4 frases."</p>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-3 border-l-4 border-purple-500">
+            <div class="text-xs text-purple-400 font-semibold mb-1">Passo 4-5: Claude propõe e aplica mudança</div>
+            <div class="bg-dark-900 rounded p-2 font-mono text-xs text-neutral-300 mt-1">Mudança aplicada na seção OUTPUT FORMAT:
+"PROIBIDO: usar bullets no desenvolvimento do vídeo.
+OBRIGATÓRIO: prosa contínua em parágrafos de 2-4 frases.
+Exceção: listas de recursos/ferramentas APENAS na seção de CTA."</div>
+          </div>
+          <div class="bg-dark-800 rounded-lg p-3 border-l-4 border-emerald-500">
+            <div class="text-xs text-emerald-400 font-semibold mb-1">Passo 6: Verificação no próximo run</div>
+            <p class="text-xs text-neutral-400">Próximo roteiro gerado: desenvolvimento em prosa corrida, nenhum bullet. Pedro aceitou sem edição. Taxa de aceitação subiu de 45% para 71% nos próximos 7 roteiros.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Antes e depois do skill file após feedback -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-2 uppercase tracking-wide">❌ Skill antes do feedback</div>
+          <pre class="text-xs text-neutral-400 font-mono whitespace-pre-wrap">## OUTPUT FORMAT
+### Desenvolvimento:
+- Use 3-5 pontos principais
+- Cada ponto com explicação
+- Use bullet points para clareza
+- Inclua exemplos quando possível</pre>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">✅ Skill após feedback (v1.2)</div>
+          <pre class="text-xs text-neutral-300 font-mono whitespace-pre-wrap">## OUTPUT FORMAT
+### Desenvolvimento (3-4 tópicos):
+FORMATO OBRIGATÓRIO: prosa contínua,
+parágrafos de 2-4 frases por tópico.
+PROIBIDO: bullets no desenvolvimento.
+MOTIVO: tom de conversa, não de slides.
+
+Cada tópico tem: contexto + exemplo
+concreto com pessoa/situação real.</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 3 -->
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">💬 Como dar feedback efetivo</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">"Isso não ficou bom" é feedback inútil. Feedback efetivo é uma instrução de melhoria disfarçada de avaliação. Ele descreve o problema, explica por que é um problema e fornece informação suficiente para que o Claude saiba exatamente como corrigir.</p>
+
+      <!-- Comparação: feedback vago vs estruturado -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-4">
+          <div class="text-xs text-red-400 font-semibold mb-3 uppercase tracking-wide">❌ Feedback vago (inútil)</div>
+          <div class="space-y-2">
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-400 font-mono">"Não gostei do resultado."</p>
+            </div>
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-400 font-mono">"O tom tá errado."</p>
+            </div>
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-400 font-mono">"Tá muito longo."</p>
+            </div>
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-400 font-mono">"Não é bem isso que eu quero."</p>
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-red-400">Resultado: Claude não sabe o que mudar. Próximo output igualmente inadequado.</div>
+        </div>
+        <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-4">
+          <div class="text-xs text-blue-400 font-semibold mb-3 uppercase tracking-wide">✅ Feedback estruturado (acionável)</div>
+          <div class="space-y-2">
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-300 font-mono">"O output usa bullet points mas minha audiência de 25-35 anos prefere prosa — bullets soam como apresentação corporativa, não como conversa."</p>
+            </div>
+            <div class="bg-dark-800 rounded p-2">
+              <p class="text-xs text-neutral-300 font-mono">"Os títulos estão muito formais — 'Explorando as Oportunidades' vs o meu estilo que seria 'Como fazer X em 10 minutos'."</p>
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-blue-400">Resultado: Claude sabe exatamente o que mudar e por quê. Melhoria imediata e persistente.</div>
+        </div>
+      </div>
+
+      <!-- Template de feedback estruturado -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">template-feedback.md — copie e use</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Template</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>## Feedback Estruturado — [Data] — [Nome da Skill]
+
+### O que estava errado:
+[Identificação precisa: qual elemento do output, qual seção,
+qual aspecto específico não funcionou]
+
+### Por que estava errado:
+[Contexto que explica o problema — não "ficou ruim" mas SIM
+"não funciona porque minha audiência é X e espera Y"]
+
+### Como deveria ser:
+[Descrição do output ideal OU exemplo concreto de como
+você reescreveria a parte problemática]
+
+### Regra geral para a skill:
+"Sempre que [condição], a skill deve [comportamento esperado].
+Nunca [comportamento proibido] porque [razão]."
+
+### Exemplos de aplicação:
+- Input X → output esperado Y (não Z)
+- Input A → output esperado B (não C)</code></pre>
+      </div>
+
+      <!-- Exemplos de 3 tipos de feedback com resultados -->
+      <h3 class="text-lg font-semibold text-neutral-200 mb-4">3 tipos de feedback com resultados reais:</h3>
+      <div class="space-y-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded">Tipo 1: Formato</span>
+          </div>
+          <p class="text-xs text-neutral-300 mb-2"><strong>Feedback:</strong> "O roteiro tem 1.400 palavras mas eu preciso de máximo 1.000 — gravo em espaço pequeno e scripts longos me fazem perder o fio. Regra: máximo 950 palavras, prefiro 800."</p>
+          <p class="text-xs text-emerald-400">Resultado: 100% dos outputs seguintes dentro de 800-950 palavras. Economizou 8 min de edição por roteiro.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded">Tipo 2: Contexto</span>
+          </div>
+          <p class="text-xs text-neutral-300 mb-2"><strong>Feedback:</strong> "O hook assumiu que a audiência conhece Claude Code, mas 70% dos meus inscritos nunca usaram. A skill precisa sempre assumir zero conhecimento técnico no hook, mesmo que o vídeo seja avançado."</p>
+          <p class="text-xs text-emerald-400">Resultado: hooks passaram a ser acessíveis para iniciantes. CTR de novos inscritos subiu 22% no mês seguinte.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded">Tipo 3: Restrição</span>
+          </div>
+          <p class="text-xs text-neutral-300 mb-2"><strong>Feedback:</strong> "O CTA sugeriu 'comece a usar IA hoje' — isso é vago demais. Todo CTA precisa de uma ação específica de máximo 5 minutos que a pessoa pode fazer agora com o que está no vídeo."</p>
+          <p class="text-xs text-emerald-400">Resultado: CTAs passaram a ter ação de 5 min. Cliques na descrição aumentaram 3x nas primeiras 48h de publicação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 4 -->
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">📋 Versionamento de skills</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Versionamento é a diferença entre melhoria rastreável e mudança caótica. Sem controle de versão, você não sabe o que mudou, quando mudou, por que mudou, e não pode reverter quando uma atualização piora a performance.</p>
+
+      <!-- Estrutura de versionamento -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">skills/ — estrutura de versionamento</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Versionamento</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>skills/
+├── youtube-roteiro/
+│   ├── youtube-roteiro-v1.0.md    ← versão original (arquivo)
+│   ├── youtube-roteiro-v1.1.md    ← corrigiu extensão
+│   ├── youtube-roteiro-v1.2.md    ← removeu bullets do dev
+│   ├── youtube-roteiro-v1.3.md    ← adicionou contexto audiência
+│   ├── youtube-roteiro-v1.4.md    ← corrigiu critérios de qualidade
+│   ├── youtube-roteiro-v1.5.md    ← versão atual (melhor performance)
+│   ├── CHANGELOG.md               ← histórico completo de mudanças
+│   └── TEST-SUITE.md              ← testes de validação
+│
+├── market-radar/
+│   ├── market-radar-v1.0.md
+│   └── CHANGELOG.md
+│
+└── README.md                      ← índice de todas as skills</code></pre>
+      </div>
+
+      <!-- Template de CHANGELOG.md -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">skills/youtube-roteiro/CHANGELOG.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">CHANGELOG</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># CHANGELOG — youtube-roteiro skill
+
+## [1.5] — 2026-04-20
+### Adicionado
+- Contexto da audiência: "Gerente Ansioso" com perfil detalhado
+- Seção de thumbnail concept para cada roteiro gerado
+### Modificado
+- Tom do desenvolvimento: de neutro para "colega experiente"
+- CTA: de genérico para ação específica de 5 min
+### Motivo
+Análise de 30 roteiros mostrou que outputs com persona
+detalhada tinham 63% mais aceitação sem edição
+
+---
+
+## [1.2] — 2026-04-14
+### Modificado
+- OUTPUT FORMAT: proibido bullets no desenvolvimento
+### Motivo
+Feedback do Pedro: bullets fragmentam o roteiro e
+soam como slide, não como conversa
+
+---
+
+## [1.1] — 2026-04-05
+### Modificado
+- Extensão: de "800-1.200 palavras" para "750-950 palavras"
+### Motivo
+Roteiros acima de 1.000 palavras exigem muita edição
+no corte — Pedro prefere roteiro mais enxuto
+
+---
+
+## [1.0] — 2026-03-28
+### Criação inicial via Skill Creator
+Perguntas respondidas: 6 | Tempo: 23 minutos</code></pre>
+      </div>
+
+      <!-- Como usar git para versionar skills -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Versionando skills com Git</h3>
+        <div class="bg-dark-900 rounded-lg p-3 font-mono text-xs text-neutral-300 space-y-1">
+          <div><span class="text-neutral-500"># Inicializar repositório de skills</span></div>
+          <div>cd ~/skills && git init</div>
+          <div class="mt-2"><span class="text-neutral-500"># Após cada atualização de skill:</span></div>
+          <div>git add youtube-roteiro/youtube-roteiro-v1.2.md</div>
+          <div>git add youtube-roteiro/CHANGELOG.md</div>
+          <div>git commit -m "skill: youtube-roteiro v1.2 — remove bullets do desenvolvimento"</div>
+          <div class="mt-2"><span class="text-neutral-500"># Para reverter para versão anterior:</span></div>
+          <div>git log --oneline youtube-roteiro/  <span class="text-neutral-500"># ver histórico</span></div>
+          <div>git checkout [hash] -- youtube-roteiro/CHANGELOG.md</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÓPICO 5 -->
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">📊 Métricas de qualidade da skill</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Sem métricas, você avalia a skill com base em como se sentiu sobre o último output. Com métricas, você tem evidências objetivas de melhoria ou regressão. A diferença entre "parece melhor" e "é 30% mais aceito" é a diferença entre percepção e fato.</p>
+
+      <!-- Dashboard visual com 4 métricas -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h3 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Dashboard — youtube-roteiro skill — Semana 16</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+          <div class="bg-dark-900 rounded-xl border border-blue-500/30 p-4 text-center">
+            <div class="text-3xl font-bold text-blue-400 mb-1">78%</div>
+            <div class="text-xs text-neutral-400">Taxa de Aceitação</div>
+            <div class="text-xs text-emerald-400 mt-1">▲ +47pp vs semana 1</div>
+          </div>
+          <div class="bg-dark-900 rounded-xl border border-emerald-500/30 p-4 text-center">
+            <div class="text-3xl font-bold text-emerald-400 mb-1">8min</div>
+            <div class="text-xs text-neutral-400">Tempo de Revisão</div>
+            <div class="text-xs text-emerald-400 mt-1">▼ -22min vs semana 1</div>
+          </div>
+          <div class="bg-dark-900 rounded-xl border border-yellow-500/30 p-4 text-center">
+            <div class="text-3xl font-bold text-yellow-400 mb-1">94%</div>
+            <div class="text-xs text-neutral-400">Consistência</div>
+            <div class="text-xs text-emerald-400 mt-1">▲ +31pp vs semana 1</div>
+          </div>
+          <div class="bg-dark-900 rounded-xl border border-purple-500/30 p-4 text-center">
+            <div class="text-3xl font-bold text-purple-400 mb-1">4.7★</div>
+            <div class="text-xs text-neutral-400">Satisfação (1-5)</div>
+            <div class="text-xs text-emerald-400 mt-1">▲ +1.9★ vs semana 1</div>
+          </div>
+        </div>
+        <div class="bg-dark-700/50 rounded-lg p-3 text-xs text-neutral-400">
+          <strong class="text-neutral-300">Como interpretar:</strong> Taxa de aceitação = % de outputs usados sem edição significativa. Consistência = % de runs com mesma estrutura para inputs similares. Satisfação = nota pessoal de 1-5 ao finalizar cada uso.
+        </div>
+      </div>
+
+      <!-- Planilha simples para rastrear qualidade -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">skill-quality-tracker.md — planilha simples</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Rastreamento</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Quality Tracker — youtube-roteiro skill
+
+| Data     | Run# | Input breve       | Status    | Edição? | Nota | Observação             |
+|----------|------|-------------------|-----------|---------|------|------------------------|
+| 14/04    | 023  | Claude Code prod  | Aceito    | Não     | 4.5  | Hook perfeito          |
+| 15/04    | 024  | IA reuniões       | Editado   | Sim     | 3.5  | Extensão: 1.100 words  |
+| 15/04    | 025  | Automação planilha| Aceito    | Não     | 5.0  | Melhor roteiro até hoje|
+| 16/04    | 026  | ChatGPT vs Claude | Descartado| -       | 2.0  | Comparativo proibido   |
+| 17/04    | 027  | IA para relatório | Aceito    | Não     | 4.0  | CTA fraco              |
+
+## Métricas da semana:
+- Runs: 5
+- Aceitos sem edição: 3 (60%)
+- Editados antes de usar: 1 (20%)
+- Descartados: 1 (20%)
+- Nota média: 3.8/5
+- Problema recorrente: extensão ainda acima de 950 palavras em 40% dos casos</code></pre>
+      </div>
+    </section>
+
+    <!-- TÓPICO 6 -->
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">🤖 Automatizando o ciclo de melhoria</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">O estágio final de maturidade é quando o próprio sistema propõe melhorias. Em vez de esperar o usuário notar e articular um problema, a skill monitora seus próprios outputs e sugere atualizações para aprovação humana.</p>
+
+      <!-- Skill file de skill-reviewer.md -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">skills/skill-reviewer.md</span>
+          <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Meta-Skill</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code># Skill Reviewer — Analisador de Qualidade
+
+## OBJETIVO
+Analisar o histórico de uso de uma skill (quality-tracker.md)
+e propor melhorias específicas e implementáveis ao skill file.
+
+## INSTRUÇÕES DE EXECUÇÃO
+1. Leia o arquivo [skill-name]/quality-tracker.md
+2. Identifique padrões de insatisfação (nota < 3.5 ou status "Editado")
+3. Leia o skill file atual [skill-name]-vX.X.md
+4. Para cada padrão encontrado, proponha uma mudança específica
+
+## ANÁLISE QUE VOCÊ DEVE FAZER
+
+### Padrão de extensão
+- Se >30% dos runs precisam de edição de tamanho: propor novo limite
+- Calcular extensão média dos outputs aceitos sem edição
+
+### Padrão de formato
+- Se observação menciona o mesmo elemento 3+ vezes: add/remove regra
+- Exemplos: "muito formal", "bullets", "muito longo", "CTA fraco"
+
+### Padrão de conteúdo
+- Se >1 run foi descartado por tema/conteúdo: add restrição
+- Se observação elogia mesmo elemento 3+ vezes: fortalecer instrução
+
+## OUTPUT FORMAT
+### Relatório de Revisão — [nome da skill] — [data]
+
+**Métricas dos últimos 30 dias:**
+- Taxa de aceitação: X%
+- Nota média: X/5
+- Problemas mais frequentes: [lista]
+
+**Propostas de melhoria (para aprovação humana):**
+
+#### Proposta 1: [título]
+Problema identificado: [descrição com dados]
+Mudança proposta no skill file:
+  ANTES: [trecho atual]
+  DEPOIS: [trecho proposto]
+Confiança: [Alta/Média/Baixa] | Motivo: [evidência]
+
+#### Proposta 2: [título]
+[mesma estrutura]
+
+**Nota:** Nenhuma mudança foi aplicada. Aguardando sua aprovação
+para cada proposta antes de criar nova versão do skill file.</code></pre>
+      </div>
+
+      <!-- Diagrama do ciclo automatizado -->
+      <div class="bg-dark-800 rounded-xl border border-dark-600 p-6 mb-6">
+        <h4 class="text-sm text-neutral-400 uppercase tracking-wide mb-4">Ciclo automatizado com controle humano</h4>
+        <div class="flex flex-col sm:flex-row items-center gap-3 flex-wrap justify-center">
+          <div class="bg-blue-500/20 border border-blue-500/30 rounded-lg px-4 py-3 text-sm text-blue-400 font-medium text-center">
+            <div class="text-lg mb-1">🧠</div>
+            Skill executa
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-sm text-neutral-400 font-medium text-center">
+            <div class="text-lg mb-1">📊</div>
+            Você avalia<br><span class="text-xs">+nota no tracker</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-dark-700 border border-dark-600 rounded-lg px-4 py-3 text-sm text-neutral-400 font-medium text-center">
+            <div class="text-lg mb-1">🤖</div>
+            Skill-reviewer<br><span class="text-xs">analisa padrões</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-yellow-500/20 border border-yellow-500/30 rounded-lg px-4 py-3 text-sm text-yellow-400 font-medium text-center">
+            <div class="text-lg mb-1">👤</div>
+            Você aprova<br><span class="text-xs">ou rejeita cada mudança</span>
+          </div>
+          <span class="text-neutral-600 text-xl">→</span>
+          <div class="bg-emerald-500/20 border border-emerald-500/30 rounded-lg px-4 py-3 text-sm text-emerald-400 font-medium text-center">
+            <div class="text-lg mb-1">✅</div>
+            Nova versão<br><span class="text-xs">commitada com changelog</span>
+          </div>
+        </div>
+        <div class="mt-4 bg-yellow-900/20 rounded-lg p-3 border border-yellow-500/20">
+          <p class="text-xs text-yellow-400">Regra de ouro: humano aprova TODA mudança antes de ser aplicada. A IA propõe, nunca decide. Isso garante que você mantém controle total sobre o que sua skill faz.</p>
+        </div>
+      </div>
+
+      <!-- Exemplo de output do skill-reviewer -->
+      <div class="bg-dark-900 rounded-xl border border-dark-600 p-4 mb-6 overflow-x-auto">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-neutral-500 font-mono">Output real do skill-reviewer — 29/Abril/2026</span>
+          <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">Output Exemplo</span>
+        </div>
+        <pre class="text-sm text-neutral-300 font-mono whitespace-pre-wrap"><code>### Relatório de Revisão — youtube-roteiro — 29/04/2026
+
+**Métricas dos últimos 14 dias:**
+- Taxa de aceitação: 78% (meta: 80%)
+- Nota média: 4.1/5
+- Total de runs: 14
+- Problemas mais frequentes:
+  1. "CTA fraco" — apareceu em 4 observações (29%)
+  2. "Extensão acima de 950" — apareceu em 3 observações (21%)
+
+---
+
+**Propostas de melhoria:**
+
+#### Proposta 1: Fortalecer critério de CTA
+Problema: 4 dos 14 runs receberam nota <3.5 com observação
+"CTA fraco" — nenhum era específico o suficiente.
+
+Mudança proposta:
+  ANTES: "CTA: ação específica que a pessoa pode fazer hoje"
+  DEPOIS: "CTA deve conter:
+    - Ação específica com verbo de ação (abrir, escrever, clicar)
+    - Duração máxima: 'em 5 minutos' ou 'agora mesmo'
+    - Objeto concreto: qual ferramenta/arquivo/mensagem
+    Exemplo aprovado: 'Agora: abra o Claude e escreva este prompt...'
+    Exemplo reprovado: 'Comece a usar IA no seu trabalho hoje'"
+
+Confiança: Alta | Evidência: 4 observações em 14 runs (29%)
+
+---
+
+Aguardando sua aprovação antes de criar v1.6 do skill file.</code></pre>
+      </div>
+    </section>
+
+    <!-- RESUMO -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-blue-900/40 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center"><span class="mr-3">✅</span> Resumo do Módulo 2.4</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skills estáticas depreciam</strong><span class="text-neutral-400"> — com refinamento: +40% em 3 meses, +140% em 6 meses, 3x diferencial em 12 meses</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Loop de 6 passos</strong><span class="text-neutral-400">: gerar → avaliar → feedback estruturado → Claude propõe → você aprova → verificar</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Feedback efetivo</strong><span class="text-neutral-400"> — descreve o que, por que é problema, como deveria ser, e a regra geral para evitar recorrência</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Versionamento com CHANGELOG</strong><span class="text-neutral-400"> — nunca sobrescrever, sempre nova versão com motivo documentado; git para histórico</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">4 métricas objetivas</strong><span class="text-neutral-400">: taxa de aceitação (78% é excelente), tempo de revisão, consistência e satisfação</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-400 mt-1">✓</span><div><strong class="text-white">Skill-reviewer</strong><span class="text-neutral-400"> — meta-skill que analisa quality-tracker e propõe melhorias específicas para aprovação humana</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-blue-400 mb-2">Próxima Trilha:</h3>
+          <p class="text-neutral-300">Trilha 3 — Na Prática: Signal Dashboard e construção do seu portfólio de super skills</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="modulo-2-3.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Módulo Anterior</a>
+          <a href="../trilha3/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próxima Trilha: Na Prática →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Super Skills 🧠 — Módulo 2.4 | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle'); const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon'); const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon'); const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) { themeToggleDarkIcon.classList.remove('hidden'); html.classList.remove('dark'); } else { themeToggleLightIcon.classList.remove('hidden'); }
+    themeToggle.addEventListener('click', () => { themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden'); html.classList.toggle('dark'); localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light'); });
+  </script>
+</body>
+</html>
